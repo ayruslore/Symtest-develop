@@ -1,0 +1,5 @@
+(define symvar1456999413::int)
+(define symvar615382633::int)
+(assert ( and ( and ( and ( and true ( > 5 symvar1456999413)) ( not ( > 5 15))) ( not ( > 5 symvar615382633))) ( > symvar615382633 15)))
+(check)
+(show-model)
