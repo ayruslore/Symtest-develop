@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/test/!svn/ver/4/SymbolicTest/src/heuristics
+END
+SwapHeuristicsUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/test/!svn/ver/37/SymbolicTest/src/heuristics/SwapHeuristicsUtil.java
+END
+RemovingEdgeHeuristicsUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/test/!svn/ver/37/SymbolicTest/src/heuristics/RemovingEdgeHeuristicsUtil.java
+END
+ApplyHeuristics.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/test/!svn/ver/37/SymbolicTest/src/heuristics/ApplyHeuristics.java
+END
