@@ -10,7 +10,7 @@ import mycfg.CFG;
 import mycfg.CFGBasicBlockNode;
 import mycfg.CFGDecisionNode;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 import statement.Statement;
 import tester.SymTest;
@@ -36,12 +36,21 @@ import expression.Variable;
  */
 public class TestElevator {
 
+	public static void main(String[] args){
+		try{
+			testFloorInput();
+		}
+		catch(Exception e){
+			System.out.println("Exception occurred");
+		}
+	}
+
 	//stationary = 0 up = 1 down = -1
-	@Test
-	public void testFloorInput() throws Exception {
-	
+	//@Test
+	public static void testFloorInput() throws Exception {
+
 		Set<ICFEdge> targets;
-		
+
 		//create CFG
 		System.out.println("Test Case 1 Start\n\n");
 		ICFG mCFG = null;
@@ -54,66 +63,66 @@ public class TestElevator {
 		ConcreteConstant constant3 = new ConcreteConstant(1, mCFG);
 //----------------------------------------------------------------------
 		//Basic Blocks
-		
+
 		ICFGBasicBlockNode B = new CFGBasicBlockNode("B", mCFG);
 		Variable floorInput = new Variable("floorInput", mCFG);
 		Input i1 = new Input(mCFG);
 		Statement stmt1 = new Statement(mCFG, floorInput, i1);
 		B.addStatement(stmt1);
-		
+
 		Variable shouldStop = new Variable("shouldStop", mCFG);
 		Input i2 = new Input(mCFG);
 		Statement stmt2 = new Statement(mCFG, shouldStop, i2);
 		B.addStatement(stmt2);
-		
+
 		Variable direction = new Variable("direction", mCFG);
 		Input i3 = new Input(mCFG);
 		Statement stmt4 = new Statement(mCFG, direction, i3);
 		B.addStatement(stmt4);
-		
+
 		Variable checkMax = new Variable("checkMax", mCFG);
 		Input i4 = new Input(mCFG);
 		Statement stmt6 = new Statement(mCFG, checkMax, i4);
 		B.addStatement(stmt6);
-		
+
 		Variable checkMin = new Variable("checkMin", mCFG);
 		Input i5 = new Input(mCFG);
 		Statement stmt7 = new Statement(mCFG, checkMin, i5);
 		B.addStatement(stmt7);
-		
+
 		Variable req1 = new Variable("Request", mCFG);
 		Input i6 = new Input(mCFG);
 		Statement stmt19 = new Statement(mCFG, req1, i6);
 		B.addStatement(stmt19);
-		
+
 		Variable position = new Variable("position", mCFG);
 		Input i7 = new Input(mCFG);
 		Statement stmt21 = new Statement(mCFG, position, i7);
 		B.addStatement(stmt21);
-		
+
 		Variable min = new Variable("min", mCFG);
 		Statement stmt22 = new Statement(mCFG, min, new ConcreteConstant(10, mCFG));
 		B.addStatement(stmt22);
-		
+
 		Variable max = new Variable("max", mCFG);
 		Statement stmt23 = new Statement(mCFG, max, constant2);
 		B.addStatement(stmt23);
-		
-		
+
+
 		mCFG.addBasicBlockNode(B);
 //--------------------------------------------------------------
-		
+
 		ICFGBasicBlockNode J = new CFGBasicBlockNode("J", mCFG);
 		Statement stmt3 = new Statement(mCFG, shouldStop, constant1);
 		J.addStatement(stmt3);
-		
+
 		Statement stmt5 = new Statement(mCFG, direction, constant2);
 		J.addStatement(stmt5);
-		
+
 		mCFG.addBasicBlockNode(J);
 //--------------------------------------------------------------------		
-		ICFGBasicBlockNode G = new CFGBasicBlockNode("G", mCFG);		
-		Statement stmt8 = new Statement(mCFG, direction, constant3);		
+		ICFGBasicBlockNode G = new CFGBasicBlockNode("G", mCFG);
+		Statement stmt8 = new Statement(mCFG, direction, constant3);
 		G.addStatement(stmt8);
 		Statement stmt9 = new Statement(mCFG, checkMax, constant3);
 		G.addStatement(stmt9);
@@ -122,11 +131,11 @@ public class TestElevator {
 		mCFG.addBasicBlockNode(G);
 //--------------------------------------------------------------------
 		ICFGBasicBlockNode I = new CFGBasicBlockNode("I", mCFG);
-		Statement stmt11 = new Statement(mCFG, direction, constant1);		
+		Statement stmt11 = new Statement(mCFG, direction, constant1);
 		I.addStatement(stmt11);
 		Statement stmt12 = new Statement(mCFG, checkMin, constant3);
 		I.addStatement(stmt12);
-		
+
 		Statement stmt13 = new Statement(mCFG, min, floorInput);
 		I.addStatement(stmt13);
 		mCFG.addBasicBlockNode(I);
@@ -204,7 +213,7 @@ public class TestElevator {
 		mCFG.addDecisionNode(U);
 //---------------------------------------------------------------------------------------	
 		//Edges
-		
+
 		ICFEdge AB = new CFEdge("AB", mCFG, A, B);
 		mCFG.addEdge(AB);
 		ICFEdge BC = new CFEdge("BC", mCFG, B, C);
@@ -267,11 +276,11 @@ public class TestElevator {
 		mCFG.addEdge(UW);
 		ICFEdge VW = new CFEdge("VW", mCFG, V, W);
 		mCFG.addEdge(VW);
-		
+
 		//Looping Edge
 		ICFEdge WA = new CFEdge("WA", mCFG, W, A);
 		mCFG.addEdge(WA);
-		
+
 		//Update conditional flow edges
 		C.setElseEdge(CW);
 		C.setThenEdge(CE);
@@ -293,7 +302,7 @@ public class TestElevator {
 		S.setThenEdge(ST);
 		U.setThenEdge(UV);
 		U.setElseEdge(UW);
-		
+
 		targets = new HashSet<ICFEdge>();
 		targets.add(BC);
 		targets.add(CE);
@@ -321,7 +330,7 @@ public class TestElevator {
 		System.out.println(seq);
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 		System.out.println(testseq);
-		
+
 	}
-	
+
 }

@@ -45,10 +45,10 @@ public class SymTest {
 	public SET set;
 	public Set<ApplyHeuristics> heuristics;
 
-	
+
 	/**
 	 * Initialises the cfg and the targets to be processed.
-	 * 
+	 *
 	 * @param cfg
 	 * @param targets
 	 */
@@ -56,7 +56,7 @@ public class SymTest {
 		this(cfg, targets, null);
 	}
 
-	
+
 	/**
 	 * This constructor is to be used to add heuristics.
 	 * @param cfg
@@ -73,7 +73,7 @@ public class SymTest {
 		}
 	}
 
-	
+
 	/**
 	 * This part holds the core algorithm of SymTest
 	 * It performs a series of steps as follows:
@@ -96,14 +96,13 @@ public class SymTest {
 			// Initialise the stack with start edge
 			IEdge startEdge = this.mConvertor.getGraphEdge(mCFG.getStartNode()
 					.getOutgoingEdgeList().get(0));
-			
+
 			stack.push(new Pair<IEdge, Boolean>(startEdge, true));
 			ArrayList<IEdge> prefix = new ArrayList<IEdge>();
 
 			IPath completePath = new Path(mGraph);
 			Set<IEdge> currentTargets = new HashSet<IEdge>(targets);
-			while ((!stack.isEmpty()) && !(stack.peek().getFirst().equals(startEdge) && !stack.peek()
-					.getSecond())) {
+			while ((!stack.isEmpty()) && !(stack.peek().getFirst().equals(startEdge) && !stack.peek().getSecond())) {
 				// Obtain the path that traverses the targets.
 				IPath path;
 				if (!hasEncounteredMaximumIterations(completePath)) {
@@ -219,12 +218,12 @@ public class SymTest {
 	private boolean hasEncounteredMaximumIterations(IPath completePath) {
 		int count = 0;
 		if (!mTarget.getOutgoingEdgeList().isEmpty()) {
-		count = Collections.frequency(completePath.getPath(),
-				mConvertor.getGraphEdge(mTarget.getOutgoingEdgeList().get(0)));
-		if (count >= MAXIMUM_ITERATIONS)
-			return true;
-		else
-			return false;
+			count = Collections.frequency(completePath.getPath(),
+					mConvertor.getGraphEdge(mTarget.getOutgoingEdgeList().get(0)));
+			if (count >= MAXIMUM_ITERATIONS)
+				return true;
+			else
+				return false;
 		} return false;
 	}
 

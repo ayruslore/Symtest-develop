@@ -10,7 +10,7 @@ import mycfg.CFG;
 import mycfg.CFGBasicBlockNode;
 import mycfg.CFGDecisionNode;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 import statement.Statement;
 import tester.SymTest;
@@ -35,8 +35,17 @@ import expression.Variable;
 
 public class CaseStudyRegressionTest {
 
-	@Test
-	public void testCruiseControl_RT() throws Exception {
+	public static void main(String[] args){
+		try{
+			testCruiseControl_RT();
+		}
+		catch(Exception e){
+			System.out.println("Exception occurred");
+		}
+	}
+
+	//@Test
+	public static void testCruiseControl_RT() throws Exception {
 
 		ICFG mCFG = null;
 		CFGBasicBlockNode start = new CFGBasicBlockNode("start", null);
@@ -52,12 +61,12 @@ public class CaseStudyRegressionTest {
 		init.addStatement(new Statement(mCFG, x6, new ConcreteConstant(0, mCFG)));
 		init.addStatement(new Statement(mCFG, PIC_DTI_x3, new ConcreteConstant(0, mCFG)));
 		mCFG.addBasicBlockNode(init);
-		
+
 		CFGBasicBlockNode mainloop = new CFGBasicBlockNode("mainloop", mCFG);
 		mCFG.addBasicBlockNode(mainloop);
-		
+
 		CFGBasicBlockNode inputs = new CFGBasicBlockNode("inputs", mCFG);
-		
+
 		BooleanVariable enable = new BooleanVariable("enable", mCFG);
 		BooleanVariable brake = new BooleanVariable("brake", mCFG);
 		Variable speed = new Variable("speed", mCFG);
@@ -71,7 +80,7 @@ public class CaseStudyRegressionTest {
 		inputs.addStatement(new Statement(mCFG, inc, new Input(mCFG)));
 		inputs.addStatement(new Statement(mCFG, dec, new Input(mCFG)));
 		mCFG.addBasicBlockNode(inputs);
-		
+
 		CFGBasicBlockNode fp1 = new CFGBasicBlockNode("fp1", mCFG);
 		BooleanVariable x1 = new BooleanVariable("x1", mCFG);
 		fp1.addStatement(new Statement(mCFG, x1, new NotExpression(mCFG, brake)));
@@ -84,7 +93,7 @@ public class CaseStudyRegressionTest {
 		Variable x10 = new Variable("x10", mCFG);
 		fp1.addStatement(new Statement(mCFG, x10, new AddExpression(mCFG, x6, new ConcreteConstant(1, mCFG))));
 		mCFG.addBasicBlockNode(fp1);
-		
+
 		Variable x7 = new Variable("x7", mCFG);
 		CFGDecisionNode d1 = new CFGDecisionNode("d1", mCFG, new NotExpression(mCFG, new EqualsExpression(mCFG, dec, new ConcreteConstant(0, mCFG))));
 		mCFG.addDecisionNode(d1);
@@ -125,78 +134,78 @@ public class CaseStudyRegressionTest {
 		fp2.addStatement(new Statement(mCFG, PIC_x3, new AddExpression(mCFG, error, PIC_DTI_x3)));
 		Variable throttle = new Variable("throttle", mCFG);
 		fp2.addStatement(new Statement(mCFG, throttle, new AddExpression(mCFG, PIC_x1, PIC_x3)));
-		
+
 
 		CFGBasicBlockNode delay = new CFGBasicBlockNode("delay", mCFG);
 		mCFG.addBasicBlockNode(delay);
 		delay.addStatement(new Statement(mCFG, PIC_DTI_x3, PIC_x3));
 		delay.addStatement(new Statement(mCFG, x6, x5));
 		delay.addStatement(new Statement(mCFG, x3, x2));
-		
+
 		ICFEdge start_init = new CFEdge("start_init", mCFG, start, init);
 		mCFG.addEdge(start_init);
 
 		ICFEdge init_mainloop = new CFEdge("init_mainloop", mCFG, init, mainloop);
 		mCFG.addEdge(init_mainloop);
-		
+
 		ICFEdge mainloop_inputs = new  CFEdge("mainloop_inputs", mCFG, mainloop, inputs);
 		mCFG.addEdge(mainloop_inputs);
-		
+
 		ICFEdge inputs_fp1 = new  CFEdge("inputs_fp1", mCFG, inputs, fp1);
 		mCFG.addEdge(inputs_fp1);
-		
+
 		ICFEdge fp1_d1 = new  CFEdge("fp1_d1", mCFG, fp1, d1);
 		mCFG.addEdge(fp1_d1);
-		
+
 		ICFEdge d1_d1then = new  CFEdge("d1_d1then", mCFG, d1, d1then);
 		mCFG.addEdge(d1_d1then);
-		
+
 		ICFEdge d1_d1else = new  CFEdge("d1_d1else", mCFG, d1, d1else);
 		mCFG.addEdge(d1_d1else);
-		
+
 		d1.setThenEdge(d1_d1then);
 		d1.setElseEdge(d1_d1else);
-		
+
 		ICFEdge d1then_d2 = new CFEdge("d1then_d2", mCFG, d1then, d2);
 		mCFG.addEdge(d1then_d2);
-		
+
 		ICFEdge d1else_d2 = new CFEdge("d1else_d2", mCFG, d1else, d2);
 		mCFG.addEdge(d1else_d2);
 
-		
+
 		ICFEdge d2_d2then = new  CFEdge("d2_d2then", mCFG, d2, d2then);
 		mCFG.addEdge(d2_d2then);
-		
+
 		ICFEdge d2_d2else = new  CFEdge("d2_d2else", mCFG, d2, d2else);
 		mCFG.addEdge(d2_d2else);
-		
+
 		d2.setThenEdge(d2_d2then);
 		d2.setElseEdge(d2_d2else);
-		
+
 		ICFEdge d2then_d3 = new CFEdge("d2then_d3", mCFG, d2then, d3);
 		mCFG.addEdge(d2then_d3);
-		
+
 		ICFEdge d2else_d3 = new CFEdge("d2else_d3", mCFG, d2else, d3);
 		mCFG.addEdge(d2else_d3);
 
 		ICFEdge d3_d3then = new  CFEdge("d3_d3then", mCFG, d3, d3then);
 		mCFG.addEdge(d3_d3then);
-		
+
 		ICFEdge d3_d3else = new  CFEdge("d3_d3else", mCFG, d3, d3else);
 		mCFG.addEdge(d3_d3else);
-		
+
 		d3.setThenEdge(d3_d3then);
 		d3.setElseEdge(d3_d3else);
-		
+
 		ICFEdge d3then_fp2 = new CFEdge("d3then_fp2", mCFG, d3then, fp2);
 		mCFG.addEdge(d3then_fp2);
-		
+
 		ICFEdge d3else_fp2 = new CFEdge("d3else_fp2", mCFG, d3else, fp2);
 		mCFG.addEdge(d3else_fp2);
-		
+
 		ICFEdge fp2_delay = new CFEdge("fp2_delay", mCFG, fp2, delay);
 		mCFG.addEdge(fp2_delay);
-		
+
 		ICFEdge delay_stop = new CFEdge("delay_stop", mCFG, delay, stop);
 		mCFG.addEdge(delay_stop);
 

@@ -40,7 +40,7 @@ public class SEE {
 
 	/**
 	 * The function expands the SET along the specified set of CFG edges
-	 * 
+	 *
 	 * @param cfgEdges
 	 * @throws Exception
 	 */
@@ -59,7 +59,7 @@ public class SEE {
 	 * node belongs to 'Then' Edge 3b. New node belongs to 'Else' edge) 
 	 * case 4 : Leaf node - Decision Node & New Node - Decision Node (4a. New node
 	 * belongs to 'Then' Edge 4b. New node belongs to 'Else' edge)
-	 * 
+	 *
 	 * @param edge
 	 */
 
@@ -128,7 +128,6 @@ public class SEE {
 			}
 		}
 		if (!valid) {
-
 			throw new Exception("New Node not connected  to Leaf ");
 		}
 	}

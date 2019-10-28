@@ -9,7 +9,7 @@ import mycfg.CFG;
 import mycfg.CFGBasicBlockNode;
 import mycfg.CFGDecisionNode;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 import statement.Statement;
 import tester.SymTest;
@@ -30,8 +30,17 @@ import expression.Variable;
 
 public class TestGM {
 
-	@Test
-	public void testGM() throws Exception {
+	public static void main(String[] args){
+		try{
+			testGM();
+		}
+		catch(Exception e){
+			System.out.println("Exception occurred");
+		}
+	}
+
+	//@Test
+	public static void testGM() throws Exception {
 
 		ICFG mCFG = null;
 		CFGBasicBlockNode start = new CFGBasicBlockNode("start", null);
@@ -50,15 +59,15 @@ public class TestGM {
 		inputs.addStatement(new Statement(mCFG, i3, new Input(mCFG)));
 		inputs.addStatement(new Statement(mCFG, i4, new Input(mCFG)));
 		mCFG.addBasicBlockNode(inputs);
-		
+
 		CFGDecisionNode D1 = new CFGDecisionNode("D1", mCFG, new EqualsExpression(mCFG, i1, new ConcreteConstant(1, mCFG)));
 		mCFG.addDecisionNode(D1);
-		
+
 		CFGBasicBlockNode D1then = new CFGBasicBlockNode("D1then", mCFG);
 		mCFG.addBasicBlockNode(D1then);
 		BooleanVariable v1 = new BooleanVariable("v1",mCFG);
-		D1then.addStatement(new Statement(mCFG, v1, new True(mCFG)));		
-		
+		D1then.addStatement(new Statement(mCFG, v1, new True(mCFG)));
+
 		CFGBasicBlockNode D1else = new CFGBasicBlockNode("D1else", mCFG);
 		mCFG.addBasicBlockNode(D1else);
 		D1then.addStatement(new Statement(mCFG, v1, new False(mCFG)));
@@ -69,8 +78,8 @@ public class TestGM {
 		CFGBasicBlockNode D2then = new CFGBasicBlockNode("D2then", mCFG);
 		mCFG.addBasicBlockNode(D2then);
 		BooleanVariable v3 = new BooleanVariable("v3", mCFG);
-		D2then.addStatement(new Statement(mCFG, v3, new True(mCFG)));		
-		
+		D2then.addStatement(new Statement(mCFG, v3, new True(mCFG)));
+
 		CFGBasicBlockNode D2else = new CFGBasicBlockNode("D2else", mCFG);
 		mCFG.addBasicBlockNode(D2else);
 		D2then.addStatement(new Statement(mCFG, v3, new False(mCFG)));
@@ -81,8 +90,8 @@ public class TestGM {
 		CFGBasicBlockNode D3then = new CFGBasicBlockNode("D3then", mCFG);
 		mCFG.addBasicBlockNode(D3then);
 		BooleanVariable v4 = new BooleanVariable("v4", mCFG);
-		D3then.addStatement(new Statement(mCFG, v4, new True(mCFG)));		
-		
+		D3then.addStatement(new Statement(mCFG, v4, new True(mCFG)));
+
 		CFGBasicBlockNode D3else = new CFGBasicBlockNode("D3else", mCFG);
 		mCFG.addBasicBlockNode(D3else);
 		D3then.addStatement(new Statement(mCFG, v4, new False(mCFG)));
@@ -93,8 +102,8 @@ public class TestGM {
 		CFGBasicBlockNode D4then = new CFGBasicBlockNode("D4then", mCFG);
 		mCFG.addBasicBlockNode(D4then);
 		BooleanVariable v5 = new BooleanVariable("v5", mCFG);
-		D4then.addStatement(new Statement(mCFG, v5, new True(mCFG)));		
-		
+		D4then.addStatement(new Statement(mCFG, v5, new True(mCFG)));
+
 		CFGBasicBlockNode D4else = new CFGBasicBlockNode("D4else", mCFG);
 		mCFG.addBasicBlockNode(D4else);
 		D4else.addStatement(new Statement(mCFG, v5, new False(mCFG)));
@@ -105,8 +114,8 @@ public class TestGM {
 		CFGBasicBlockNode D5then = new CFGBasicBlockNode("D5then", mCFG);
 		mCFG.addBasicBlockNode(D5then);
 		BooleanVariable v2 = new BooleanVariable("v2", mCFG);
-		D5then.addStatement(new Statement(mCFG, v2, new True(mCFG)));		
-		
+		D5then.addStatement(new Statement(mCFG, v2, new True(mCFG)));
+
 		CFGBasicBlockNode D5else = new CFGBasicBlockNode("D5else", mCFG);
 		mCFG.addBasicBlockNode(D5else);
 		D5else.addStatement(new Statement(mCFG, v2, new False(mCFG)));
@@ -115,11 +124,11 @@ public class TestGM {
 		CFGBasicBlockNode fp = new CFGBasicBlockNode("fp", mCFG);
 		mCFG.addBasicBlockNode(fp);
 		BooleanVariable v6 = new BooleanVariable("v6", mCFG);
-		D5then.addStatement(new Statement(mCFG, v6, new OrExpression(mCFG, v4, v5)));		
+		D5then.addStatement(new Statement(mCFG, v6, new OrExpression(mCFG, v4, v5)));
 		BooleanVariable v7 = new BooleanVariable("v7", mCFG);
-		D5then.addStatement(new Statement(mCFG, v7, new OrExpression(mCFG, v2, new OrExpression(mCFG, v3, v6))));		
+		D5then.addStatement(new Statement(mCFG, v7, new OrExpression(mCFG, v2, new OrExpression(mCFG, v3, v6))));
 		BooleanVariable v9 = new BooleanVariable("v9", mCFG);
-		D5then.addStatement(new Statement(mCFG, v9, new OrExpression(mCFG, v6, new True(mCFG))));		
+		D5then.addStatement(new Statement(mCFG, v9, new OrExpression(mCFG, v6, new True(mCFG))));
 		BooleanVariable v10 = new BooleanVariable("v10", mCFG);
 		D5then.addStatement(new Statement(mCFG, v10, new AndExpression(mCFG, v1, v7)));
 
@@ -129,26 +138,26 @@ public class TestGM {
 
 		CFGBasicBlockNode D6then = new CFGBasicBlockNode("D6then", mCFG);
 		mCFG.addBasicBlockNode(D6then);
-		D6then.addStatement(new Statement(mCFG, v6, new True(mCFG)));		
-		
+		D6then.addStatement(new Statement(mCFG, v6, new True(mCFG)));
+
 		CFGDecisionNode D7 = new CFGDecisionNode("D7", mCFG, new EqualsExpression(mCFG, v9, new True(mCFG)));
 		mCFG.addDecisionNode(D7);
 
 		CFGBasicBlockNode D7then = new CFGBasicBlockNode("D7then", mCFG);
 		mCFG.addBasicBlockNode(D7then);
 		BooleanVariable v14 = new BooleanVariable("v14", mCFG);
-		D7then.addStatement(new Statement(mCFG, v14, new True(mCFG)));		
-		
+		D7then.addStatement(new Statement(mCFG, v14, new True(mCFG)));
+
 		CFGBasicBlockNode D7else = new CFGBasicBlockNode("D7else", mCFG);
 		mCFG.addBasicBlockNode(D7else);
-		D7else.addStatement(new Statement(mCFG, v14, new False(mCFG)));		
-		
+		D7else.addStatement(new Statement(mCFG, v14, new False(mCFG)));
+
 		ICFEdge start_inputs = new CFEdge("start_inputs", mCFG, start, inputs);
 		mCFG.addEdge(start_inputs);
-		
+
 		ICFEdge inputs_D1 = new CFEdge("inputs_D1", mCFG, inputs, D1);
 		mCFG.addEdge(inputs_D1);
-		
+
 		ICFEdge D1_D1then = new CFEdge("D1_D1then", mCFG, D1, D1then);
 		mCFG.addEdge(D1_D1then);
 
@@ -160,7 +169,7 @@ public class TestGM {
 
 		ICFEdge D1then_D2 = new CFEdge("D1then_D2", mCFG, D1then, D2);
 		mCFG.addEdge(D1then_D2);
-		
+
 		ICFEdge D1else_D2 = new CFEdge("D1else_D2", mCFG, D1else, D2);
 		mCFG.addEdge(D1else_D2);
 
@@ -175,7 +184,7 @@ public class TestGM {
 
 		ICFEdge D2then_D3 = new CFEdge("D2then_D3", mCFG, D2then, D3);
 		mCFG.addEdge(D2then_D3);
-		
+
 		ICFEdge D2else_D3 = new CFEdge("D2else_D3", mCFG, D2else, D3);
 		mCFG.addEdge(D2else_D3);
 
@@ -190,7 +199,7 @@ public class TestGM {
 
 		ICFEdge D3then_D4 = new CFEdge("D3then_D4", mCFG, D3then, D4);
 		mCFG.addEdge(D3then_D4);
-		
+
 		ICFEdge D3else_D4 = new CFEdge("D3else_D4", mCFG, D3else, D4);
 		mCFG.addEdge(D3else_D4);
 
@@ -205,7 +214,7 @@ public class TestGM {
 
 		ICFEdge D4then_D5 = new CFEdge("D4then_D5", mCFG, D4then, D5);
 		mCFG.addEdge(D4then_D5);
-		
+
 		ICFEdge D4else_D5 = new CFEdge("D4else_D5", mCFG, D4else, D5);
 		mCFG.addEdge(D4else_D5);
 
@@ -220,13 +229,13 @@ public class TestGM {
 
 		ICFEdge D5then_fp = new CFEdge("D5then_fp", mCFG, D5then, fp);
 		mCFG.addEdge(D5then_fp);
-		
+
 		ICFEdge D5else_fp = new CFEdge("D5else_fp", mCFG, D5else, fp);
 		mCFG.addEdge(D5else_fp);
 
 		ICFEdge fp_D6 = new CFEdge("fp_D6", mCFG, fp, D6);
 		mCFG.addEdge(fp_D6);
-		
+
 		ICFEdge D6_D6then = new CFEdge("D6_D6then", mCFG, D6, D6then);
 		mCFG.addEdge(D6_D6then);
 
@@ -250,13 +259,13 @@ public class TestGM {
 
 		ICFEdge D7then_stop = new CFEdge("D7then_stop", mCFG, D7then, stop);
 		mCFG.addEdge(D7then_stop);
-		
+
 		ICFEdge D7else_stop = new CFEdge("D7else_stop", mCFG, D7else, stop);
 		mCFG.addEdge(D7else_stop);
-		
+
 		ICFEdge stop_start = new CFEdge("stop_start", mCFG, stop, start);
-		mCFG.addEdge(stop_start);		
-		
+		mCFG.addEdge(stop_start);
+
 		Set<ICFEdge> targets = mCFG.getEdgeSet();
 		targets.remove(stop_start);
 		targets.remove(start_inputs);
