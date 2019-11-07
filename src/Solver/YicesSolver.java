@@ -31,15 +31,13 @@ public class YicesSolver implements ISolver {
 		String yicesInput = YicesSolver.makeYicesInput(this.mVariables,
 				this.mExpression);
 
-		// System.out.println("/home/sujit/My-Download/yices-2.2.2/bin/yices input :\n" + yicesInput);
-
 		FileWriter outFile;
 
 		outFile = new FileWriter("resources/input.ys");
 		PrintWriter out = new PrintWriter(outFile);
 		out.println(yicesInput);
 		out.close();
-		String command = "/home/sujit/My-Downloads/yices-2.2.2/bin/yices resources/input.ys";
+		String command = "/usr/bin/yices resources/input.ys";
 		String output = YicesSolver.cmdExec(command);
 		// System.out.println("yices output :\n" + output);
 
@@ -58,8 +56,8 @@ public class YicesSolver implements ISolver {
 	 * @throws Exception
 	 */
 	private static String makeYicesInput(Set<IIdentifier> mVariables2,
-			IExpression expression) throws Exception {
-		
+										 IExpression expression) throws Exception {
+
 
 		ExpressionPreorderToStringVisitor preVisitor = new ExpressionPreorderToStringVisitor();
 
@@ -105,7 +103,6 @@ public class YicesSolver implements ISolver {
 			line = input.readLine();
 		}
 		input.close();
-
 		return output;
 	}
 
