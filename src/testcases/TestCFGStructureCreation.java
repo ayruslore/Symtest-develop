@@ -19,9 +19,9 @@ import cfg.ICFGNode;
 
 /**
  * Test cases for different types of basic constructs of CFG
- * 
+ *
  * @author pavithra
- * 
+ *
  */
 
 public class TestCFGStructureCreation {

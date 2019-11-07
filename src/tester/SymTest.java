@@ -26,6 +26,7 @@ import mygraph.Path;
 
 import set.SET;
 import set.SETBasicBlockNode;
+import set.SETDecisionNode;
 import set.SETNode;
 import utilities.Pair;
 import Solver.SolverResult;
@@ -128,6 +129,21 @@ public class SymTest {
 				ArrayList<ICFEdge> cfPath = convertPathEdgesToCFGEdges(completePath);
 				// Construct the Symbolic Execution Tree
 				set = SymTestUtil.getSET(cfPath, this.mCFG);
+				System.out.println("SURYA 1");
+				Set<SETNode> mnode = set.getNodeSet();
+				System.out.println(mnode.size());
+				for (SETNode lol : mnode) {
+					if (lol instanceof SETBasicBlockNode) {
+						Map<IIdentifier, IExpression> values = ((SETBasicBlockNode) lol).getValues();
+						values.entrySet().forEach(entry -> {
+							System.out.println(entry.getKey().toString() + " == " + entry.getValue().toString());
+						});
+					} else {
+						IExpression lol1 = ((SETDecisionNode) lol).getCondition();
+						System.out.println(lol1.toString());
+					}
+				}
+				System.out.println("SURYA 2");
 				// Solve the predicate
 				SolverResult solution;
 				try {

@@ -1,5 +1,6 @@
 CaseStudyRegressionTest - Not Working
 TestCFGStructureCreation - Working
+<<<<<<< HEAD
 TestElevator - Working
 TestGM - Not Working
 TestMatlabExample - Working
@@ -7,4 +8,13 @@ TestMyCFG - Working
 TestSEEConstruction - Not Working
 TestSymTest - Working
 TestSymTestUnSatPredicates - Working
+=======
+TestElevator - Working          (Good)
+TestGM - Not Working
+TestMatlabExample - Working      (Good)
+TestMyCFG - Working
+TestSEEConstruction - Not Working
+TestSymTest - Working             (Small Examples)
+TestSymTestUnSatPredicates - Working             (one small one)
+>>>>>>> origin/master
 TestTimer - Not Working

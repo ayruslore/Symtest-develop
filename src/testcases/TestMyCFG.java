@@ -21,9 +21,9 @@ import expression.Variable;
 /**
  * Consists of test cases that would ensure the structure establishment of a
  * graph
- * 
+ *
  * @author pavithra
- * 
+ *
  */
 public class TestMyCFG {
 
@@ -337,7 +337,7 @@ public class TestMyCFG {
 	}
 
 	/**
-	 * 
+	 *
 	 * Validates the variables in the graph
 	 */
 	//@Test

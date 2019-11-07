@@ -51,7 +51,7 @@ public class TestSymTest {
 
 	/**
 	 * Checks CFG of format S->T refer testcase1.jpg in resources folder
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	//@Test
@@ -86,7 +86,7 @@ public class TestSymTest {
 
 	/**
 	 * Check CFG of the form S->BasicBlock->Terminal Refer testcase2.jpg
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	//@Test
@@ -131,7 +131,7 @@ public class TestSymTest {
 	/**
 	 * A looped If else CFG Refer TestCase4.jpg Edges in bold are the specified
 	 * targets.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	//@Test
@@ -222,7 +222,7 @@ public class TestSymTest {
 	/**
 	 * A looped If else CFG Refer TestCase3.jpg Edges in bold are the specified
 	 * targets.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	//@Test
@@ -308,7 +308,7 @@ public class TestSymTest {
 	/**
 	 * A usual If else CFG Refer TestCase5.jpg Edges in bold are the specified
 	 * targets.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	//@Test
@@ -391,7 +391,7 @@ public class TestSymTest {
 	/**
 	 * A usual If else CFG Refer TestCase6.jpg Edges in bold are the specified
 	 * targets.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	//@Test
@@ -472,7 +472,7 @@ public class TestSymTest {
 	/**
 	 * CFG: Find greatest of three numbers refer TestCase7.jpg Targets: v1>v2,
 	 * v1 > v3
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	//@Test
@@ -506,7 +506,7 @@ public class TestSymTest {
 	 * CFG: Find greatest of three numbers refer TestCase8.jpg Targets: All
 	 * branches of DecisionNode1, DecisionNode2 Case 1: v1>v2>v3 Case 2: V1>v2,
 	 * v1<=v3
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	//Test
@@ -539,7 +539,7 @@ public class TestSymTest {
 	/**
 	 * CFG: Find greatest of three numbers refer TestCase9.jpg Targets: All
 	 * possible Branches
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	//@Test
@@ -579,7 +579,7 @@ public class TestSymTest {
 	/**
 	 * CFG: Double decision Boxes and updated value for variables Targets: Can
 	 * be covered if the value gets updated Refer TestCase10.jpg
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	//@Test
