@@ -7,5 +7,4 @@ TestMyCFG - Working
 TestSEEConstruction - Not Working
 TestSymTest - Working             (Small Examples)
 TestSymTestUnSatPredicates - Working             (one small one)
->>>>>>> origin/master
 TestTimer - Not Working
