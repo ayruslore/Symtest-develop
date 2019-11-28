@@ -10,10 +10,11 @@ public class FunctionCall extends Expression {
     private String func_name;
     private Set<IExpression> args;
 
-    public FunctionCall(IProgram program, String name, Set<IExpression> margs) throws Exception {
+    public FunctionCall(IProgram program, String name, Set<IExpression> c_args) throws Exception {
         super(program, Type.FUNC);
+
         this.func_name = name;
-        this.args = margs;
+        this.args = c_args;
     }
 
     public String getFunctionname(){
