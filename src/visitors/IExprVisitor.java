@@ -1,25 +1,6 @@
 package visitors;
 
-import expression.AddExpression;
-import expression.AndExpression;
-import expression.BooleanVariable;
-import expression.ConcreteConstant;
-import expression.DivExpression;
-import expression.EqualsExpression;
-import expression.False;
-import expression.GreaterThanEqualToExpression;
-import expression.GreaterThanExpression;
-import expression.IExpression;
-import expression.IIdentifier;
-import expression.Input;
-import expression.LesserThanEqualToExpression;
-import expression.LesserThanExpression;
-import expression.MulExpression;
-import expression.NotExpression;
-import expression.OrExpression;
-import expression.SubExpression;
-import expression.True;
-import expression.Variable;
+import expression.*;
 
 public interface IExprVisitor<T> {
 	void visit(Input exp);
@@ -57,6 +38,8 @@ public interface IExprVisitor<T> {
 	void visit(NotExpression exp) throws Exception;
 
 	void visit(EqualsExpression exp) throws Exception;
+
+	void visit(FunctionCallExpression exp) throws Exception;
 
 	void visit(IExpression exp) throws Exception;
 

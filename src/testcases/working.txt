@@ -1,8 +1,8 @@
 CaseStudyRegressionTest - Not Working
 TestCFGStructureCreation - Working
-TestElevator - Working          (Good)
+TestElevator - Working          (Good) CFG Done
 TestGM - Not Working
-TestMatlabExample - Working      (Good)
+TestMatlabExample - Working      (Good) First not working, Second one now giving unknown exception
 TestMyCFG - Working
 TestSEEConstruction - Not Working
 TestSymTest - Working             (Small Examples)

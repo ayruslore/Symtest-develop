@@ -1,6 +1,7 @@
 package heuristics;
 
 import exceptions.UnSatisfiableException;
+import functions.Function;
 import graph.IEdge;
 import graph.IGraph;
 import graph.INode;
@@ -30,11 +31,11 @@ public class SwapHeuristicsUtil implements ApplyHeuristics {
 
 	
 	public SolverResult performHeuristics(IGraph graph,
-			Set<ICFEdge> mTargets, IPath graphpath, ICFG cfg,
-			CFGToGraphConvertor mConvertor) throws Exception {
+										  Set<ICFEdge> mTargets, IPath graphpath, ICFG cfg,
+										  CFGToGraphConvertor mConvertor, Set<Function> functions) throws Exception {
 		ArrayList<ICFEdge> path = convertPathEdgesToCFGEdges(graphpath,
 				mConvertor);
-		int index = SymTestUtil.getLongestSatisfiablePrefix(path, cfg);
+		int index = SymTestUtil.getLongestSatisfiablePrefix(path, cfg, functions);
 		int unsatisfiableEdgeIndex = index + 1;
 		IEdge newEdge = null;
 		IEdge oldEdge = mConvertor.getGraphEdge(path
@@ -62,7 +63,7 @@ public class SwapHeuristicsUtil implements ApplyHeuristics {
 				newIndex + 1);
 		ArrayList<ICFEdge> newCFPath = convertPathEdgesToCFGEdges(newPath,
 				mConvertor);
-		SET set = SymTestUtil.getSET(newCFPath, cfg);
+		SET set = SymTestUtil.getSET(newCFPath, cfg, functions);
 		// Solve the predicate
 		SolverResult solution = SymTestUtil.solveSequence(set);
 

@@ -2,15 +2,15 @@ package testcases;
 
 import java.util.ArrayList;
 import java.util.List;
-import junit.framework.Assert;
+//import junit.framework.Assert;
 import mycfg.CFEdge;
 import mycfg.CFG;
 import mycfg.CFGBasicBlockNode;
 import mycfg.CFGDecisionNode;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+//import org.junit.Rule;
+//import org.junit.Test;
+//import org.junit.rules.ExpectedException;
 
 import see.SEE;
 import set.SET;
@@ -32,7 +32,7 @@ import expression.Variable;
  */
 public class TestSEEConstruction {
 
-	private List<ICFEdge> edgeList;
+	/*private List<ICFEdge> edgeList;
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
@@ -40,7 +40,7 @@ public class TestSEEConstruction {
 
 	/**
 	 * 11.4.13 Input: NUll CFG Expected Output: Exception Thrown
-	 */
+	 *
 	@Test(expected = Exception.class)
 	public final void testNullCFG() throws Exception {
 		ICFG mCFG = null;
@@ -50,7 +50,7 @@ public class TestSEEConstruction {
 	/**
 	 * 11.4.13 Input: Valid Loop CFG with Null Edges on the path Expected
 	 * Output: Exception Thrown
-	 */
+	 *
 	@Test(expected = Exception.class)
 	public final void testValidCFGWithNullEdges() throws Exception {
 		ICFG mCFG = createLoopCFG();
@@ -63,7 +63,7 @@ public class TestSEEConstruction {
 	/**
 	 * 11.4.13 Input: Loop CFG with dangling edges. 
 	 * Expected Output: Exception Thrown
-	 */
+	 *
 	@Test(expected = Exception.class)
 	public final void testCFGWithDanglingEdges() throws Exception {
 		ICFG mCFG;
@@ -90,7 +90,7 @@ public class TestSEEConstruction {
 	 * Expected: Exception to be thrown
 	 * Refer testNullCondition.jpg
 	 * @throws Exception
-	 */
+	 *
 	@Test(expected = Exception.class)
 	public final void testNullCondition() throws Exception {
 		ICFG mCFG = null;
@@ -112,7 +112,7 @@ public class TestSEEConstruction {
 	 * Covers the case of two basic blocks and Decision block -> Basic block
 	 * Targets: e1,e2,e3,e5,e9,e13, e6,e10
 	 * @throws Exception
-	 */
+	 *
 	
 	@Test
 	public final void testCFGwithValidEdges() throws Exception {
@@ -143,7 +143,7 @@ public class TestSEEConstruction {
 	 * 10.4.14 Input: valid cfg and a valid set of edges 
 	 * Expected Output: Valid SET
 	 * Targets: e1,e2,e3, e5, e9, e4,e7, e11
-	 */
+	 *
 	@Test
 	public final void testSETWithTwoConsecutiveDecisionBlocksOnThenEdge()
 			throws Exception {
@@ -171,7 +171,7 @@ public class TestSEEConstruction {
 	 * 10.4.13 Input: valid cfg and a valid set of edges 
 	 * Expected Output: Valid SET
 	 * Covers e1,e2,e3,e5,e9,e8, e12, e14
-	 */
+	 *
 	@Test
 	public final void testSETWithTwoConsecutiveDecisionBlocksOnElseEdge()
 			throws Exception {
@@ -199,7 +199,7 @@ public class TestSEEConstruction {
 	 * Refer greatestofthreenumbers.jpg
 	 * @return cfg
 	 * @throws Exception
-	 */
+	 *
 	public ICFG constructLargestOfThreeNumbersCFG() throws Exception {
 
 		ICFG mCFG = null;
@@ -342,7 +342,7 @@ public class TestSEEConstruction {
 	 * @return
 	 * refer 
 	 * @throws Exception
-	 */
+	 *
 	public ICFG createLoopCFG() throws Exception {
 		ICFG mCFG = null;
 		edgeList = new ArrayList<ICFEdge>();
@@ -392,5 +392,5 @@ public class TestSEEConstruction {
 		mCFG.addEdge(e5);
 
 		return mCFG;
-	}
+	}*/
 }

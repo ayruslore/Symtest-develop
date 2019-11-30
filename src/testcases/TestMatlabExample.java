@@ -39,12 +39,12 @@ public class TestMatlabExample {
 
 	public static void main(String[] args) {
 
-		try{
+		/*try{
 			testMatlabExample();
 		}
 		catch (Exception e){
 			System.out.println("Exception Occurred");
-		}
+		}*/
 		try{
 			testCruiseControl();
 		}
@@ -335,8 +335,8 @@ public class TestMatlabExample {
 		BooleanVariable set = new BooleanVariable("set", mCFG);
 		Variable inc = new Variable("inc", mCFG);
 		Variable dec = new Variable("dec", mCFG);
-		inputs.addStatement(new Statement(mCFG, enable, new Input(mCFG)));
-		inputs.addStatement(new Statement(mCFG, brake, new Input(mCFG)));
+		inputs.addStatement(new Statement(mCFG, enable, new BooleanInput(mCFG)));
+		inputs.addStatement(new Statement(mCFG, brake, new BooleanInput(mCFG)));
 		inputs.addStatement(new Statement(mCFG, speed, new Input(mCFG)));
 		inputs.addStatement(new Statement(mCFG, set, new BooleanInput(mCFG)));
 		inputs.addStatement(new Statement(mCFG, inc, new Input(mCFG)));
@@ -474,10 +474,18 @@ public class TestMatlabExample {
 		ICFEdge stop_start = new CFEdge("stop_start", mCFG, stop, start);
 		mCFG.addEdge(stop_start);
 
-		Set<ICFEdge> targets = mCFG.getEdgeSet();
-		targets.remove(stop_start);
+		Set<ICFEdge> targets = new HashSet<ICFEdge>(); //mCFG.getEdgeSet();
+		targets.add(init_mainloop);
+		/*targets.remove(stop_start);
 		targets.remove(init_mainloop);
 		targets.remove(start_init);
+		targets.remove(d1_d1else);
+		targets.remove(d1else_d2);
+		targets.remove(d2_d2else);
+		targets.remove(d2else_d3);
+		targets.remove(d3_d3else);
+		targets.remove(d3else_fp2);
+		//targets.removeAll();*/
 		SymTest st = new SymTest(mCFG, targets);
 		TestSequence seq = st.generateTestSequence();
 		System.out.println(seq);

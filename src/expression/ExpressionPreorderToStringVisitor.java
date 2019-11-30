@@ -120,6 +120,17 @@ public class ExpressionPreorderToStringVisitor implements IExprVisitor<String> {
 		this.mStack.push(s);
 	}
 
+	@Override
+	public void visit(FunctionCallExpression exp) throws Exception {
+		exp.accept(this);
+		String s = exp.getFunc_name() + "( ";
+		for(int i = 0; i < exp.get_Number_of_Args() - 1; i++){
+			s = s + this.mStack.pop() + ",";
+		}
+		s = s + this.mStack.pop() + " )";
+		this.mStack.push(s);
+	}
+
 	public void visit(IExpression exp) throws Exception {
 		if(exp instanceof ConcreteConstant) {
 			this.visit((ConcreteConstant)exp);
@@ -180,6 +191,9 @@ public class ExpressionPreorderToStringVisitor implements IExprVisitor<String> {
 		}
 		else if(exp instanceof EqualsExpression) {
 			this.visit((EqualsExpression)exp);
+		}
+		else if(exp instanceof FunctionCallExpression) {
+			this.visit((FunctionCallExpression)exp);
 		}
 		else if(exp == null) {
 		}

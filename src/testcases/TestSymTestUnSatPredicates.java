@@ -36,7 +36,7 @@ public class TestSymTestUnSatPredicates {
 		catch(Exception e){
 			System.out.println("Exception 1");
 		}
-		try{
+		/*try{
 			testSwapHeuristicsWithUnsatisfiableEdgeAsElseEedge();
 		}
 		catch(Exception e){
@@ -47,7 +47,7 @@ public class TestSymTestUnSatPredicates {
 		}
 		catch(Exception e){
 			System.out.println("Exception 3");
-		}
+		}*/
 	}
 
 	//@Test

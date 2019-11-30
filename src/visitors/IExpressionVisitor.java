@@ -17,4 +17,5 @@ public interface IExpressionVisitor {
 	public IExpression visit(GreaterThanEqualToExpression exp);
 	public IExpression visit(LesserThanExpression exp);
 	public IExpression visit(LesserThanEqualToExpression exp);
+	public IExpression visit(FunctionCallExpression exp);
 }

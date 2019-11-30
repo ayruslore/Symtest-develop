@@ -4,6 +4,7 @@ import exceptions.UnSatisfiableException;
 import expression.IExpression;
 import expression.IIdentifier;
 import expression.Variable;
+import functions.Function;
 import graph.IEdge;
 import graph.IGraph;
 import graph.INode;
@@ -46,6 +47,8 @@ public class SymTest {
 	public SET set;
 	public Set<ApplyHeuristics> heuristics;
 
+	public Set<Function> mfunctions;
+
 
 	/**
 	 * Initialises the cfg and the targets to be processed.
@@ -53,8 +56,13 @@ public class SymTest {
 	 * @param cfg
 	 * @param targets
 	 */
-	public SymTest(ICFG cfg, Set<ICFEdge> targets) {
-		this(cfg, targets, null);
+	public SymTest(ICFG cfg, Set<ICFEdge> targets, Set<Function> functions) {
+		this.mCFG = cfg;
+		this.mTargets = targets;
+		this.heuristics = null;
+		this.mfunctions = functions;
+		this.mConvertor = new CFGToGraphConvertor(this.mCFG);
+		this.mTarget = this.mCFG.getStopNode();
 	}
 
 
@@ -64,7 +72,7 @@ public class SymTest {
 	 * @param targets
 	 * @param heuristics
 	 */
-	public SymTest(ICFG cfg, Set<ICFEdge> targets, Set<ApplyHeuristics> heuristics) {
+	public SymTest(ICFG cfg, Set<ICFEdge> targets, Set<ApplyHeuristics> heuristics, Set<Function> functions) {
 		this.mCFG = cfg;
 		this.mTargets = targets;
 		this.mTarget = this.mCFG.getStopNode();
@@ -72,6 +80,7 @@ public class SymTest {
 		if (heuristics != null) {
 			this.heuristics = heuristics;
 		}
+		this.mfunctions = functions;
 	}
 
 
@@ -125,11 +134,17 @@ public class SymTest {
 					// that gets added
 					path = new Path(mGraph);
 				}
+				//System.out.println("SURYA -1");
 				completePath.setPath(addprefix(prefix, path.getPath()));
+				//System.out.println("SURYA 0");
 				ArrayList<ICFEdge> cfPath = convertPathEdgesToCFGEdges(completePath);
+				/*for( ICFEdge edge : cfPath ){
+					System.out.print(edge.getId() + ", ");
+				}
+				System.out.println();*/
 				// Construct the Symbolic Execution Tree
-				set = SymTestUtil.getSET(cfPath, this.mCFG);
-				System.out.println("SURYA 1");
+				set = SymTestUtil.getSET(cfPath, this.mCFG, this.mfunctions);
+				/*System.out.println("SURYA 1");
 				Set<SETNode> mnode = set.getNodeSet();
 				System.out.println(mnode.size());
 				for (SETNode lol : mnode) {
@@ -138,12 +153,14 @@ public class SymTest {
 						values.entrySet().forEach(entry -> {
 							System.out.println(entry.getKey().toString() + " == " + entry.getValue().toString());
 						});
+						System.out.println( lol.getCFGNode().getId() );
 					} else {
 						IExpression lol1 = ((SETDecisionNode) lol).getCondition();
 						System.out.println(lol1.toString());
+						System.out.println( lol.getCFGNode().getId() );
 					}
 				}
-				System.out.println("SURYA 2");
+				System.out.println("SURYA 2");*/
 				// Solve the predicate
 				SolverResult solution;
 				try {
@@ -160,7 +177,7 @@ public class SymTest {
 					for (ApplyHeuristics heuristic : heuristics) {
 						try {
 							solution = heuristic.performHeuristics(mGraph,
-									mTargets, completePath, mCFG, mConvertor);
+									mTargets, completePath, mCFG, mConvertor, mfunctions);
 							return (this.convert(set.getLeafNodes().iterator()
 									.next(), solution));
 
@@ -172,7 +189,7 @@ public class SymTest {
 				if (!hasEncounteredMaximumIterations(completePath)) {
 					// Get Longest Viable Prefix(LVP)
 					int satisfiableIndex = SymTestUtil
-							.getLongestSatisfiablePrefix(cfPath, mCFG);
+							.getLongestSatisfiablePrefix(cfPath, mCFG, this.mfunctions);
 					List<IEdge> satisfiablePrefix = new ArrayList<IEdge>();
 					satisfiablePrefix.addAll(completePath.getPath().subList(
 							(completePath.getPath().size() - 1)

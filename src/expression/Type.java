@@ -6,13 +6,15 @@ import java.util.Set;
 public class Type {
 	public static final String BOOLEAN = "boolean";
 	public static final String INT = "int";
-	
-	private static Type mType = null;
+    public static final String FUNC = "function call";
+
+    private static Type mType = null;
 	private static Set<String> mTypes = new HashSet<String>();
 	
 	private Type() {
 		Type.mTypes.add(Type.BOOLEAN);
 		Type.mTypes.add(Type.INT);
+		Type.mTypes.add(Type.FUNC);
 	}
 	
 	public static void addType(String typeName) {

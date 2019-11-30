@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import expression.*;
+import functions.Function;
 import mycfg.CFEdge;
 import mycfg.CFG;
 import mycfg.CFGBasicBlockNode;
@@ -19,15 +21,6 @@ import cfg.ICFEdge;
 import cfg.ICFG;
 import cfg.ICFGBasicBlockNode;
 import cfg.ICFGDecisionNode;
-import expression.AddExpression;
-import expression.AndExpression;
-import expression.ConcreteConstant;
-import expression.EqualsExpression;
-import expression.GreaterThanExpression;
-import expression.IExpression;
-import expression.IIdentifier;
-import expression.Input;
-import expression.Variable;
 
 /**
  * Test cases for elevator.c in /resources
@@ -101,7 +94,8 @@ public class TestElevator {
 		B.addStatement(stmt21);
 
 		Variable min = new Variable("min", mCFG);
-		Statement stmt22 = new Statement(mCFG, min, new ConcreteConstant(10, mCFG));
+		FunctionCallExpression exp_func = new FunctionCallExpression(mCFG, "funky", new HashSet<IExpression>());
+		Statement stmt22 = new Statement(mCFG, min, exp_func);
 		B.addStatement(stmt22);
 
 		Variable max = new Variable("max", mCFG);
@@ -325,7 +319,8 @@ public class TestElevator {
 		targets.add(UW);
 		targets.add(NO);
 		targets.add(NS);
-		SymTest st = new SymTest(mCFG, targets);
+		Set<Function> allfunctions = new HashSet<Function>();
+		SymTest st = new SymTest(mCFG, targets, allfunctions);
 		TestSequence seq = st.generateTestSequence();
 		System.out.println(seq);
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();

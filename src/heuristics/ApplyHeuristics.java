@@ -1,5 +1,6 @@
 package heuristics;
 
+import functions.Function;
 import graph.IGraph;
 import graph.IPath;
 
@@ -13,7 +14,7 @@ import Solver.SolverResult;
 public interface ApplyHeuristics {
 	
 	public SolverResult performHeuristics(IGraph graph,
-			Set<ICFEdge> mTargets, IPath graphpath, ICFG cfg,
-			CFGToGraphConvertor mConvertor) throws Exception ;
+										  Set<ICFEdge> mTargets, IPath graphpath, ICFG cfg,
+										  CFGToGraphConvertor mConvertor, Set<Function> functions) throws Exception ;
 
 }

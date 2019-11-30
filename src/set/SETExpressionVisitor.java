@@ -5,37 +5,21 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
 
+import expression.*;
+import functions.FunctionHandler;
 import program.IProgram;
+import see.SEE;
 import visitors.IExprVisitor;
-import expression.AddExpression;
-import expression.AndExpression;
-import expression.BooleanInput;
-import expression.BooleanVariable;
-import expression.ConcreteConstant;
-import expression.DivExpression;
-import expression.EqualsExpression;
-import expression.False;
-import expression.GreaterThanEqualToExpression;
-import expression.GreaterThanExpression;
-import expression.IExpression;
-import expression.IIdentifier;
-import expression.Input;
-import expression.LesserThanEqualToExpression;
-import expression.LesserThanExpression;
-import expression.MulExpression;
-import expression.NotExpression;
-import expression.OrExpression;
-import expression.SubExpression;
-import expression.True;
-import expression.Variable;
 
 public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 
+	private SEE mSEE;
 	private SETNode mNode;
 	private Stack<IExpression> mStack = new Stack<IExpression>();
 	private final String mContextType; 
 
-	public SETExpressionVisitor(SETNode node, String type) {
+	public SETExpressionVisitor(SEE see ,SETNode node, String type) {
+		this.mSEE = see;
 		this.mNode = node;
 		this.mContextType = type;		
 	}
@@ -105,7 +89,9 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		else if(exp instanceof EqualsExpression) {
 			this.visit((EqualsExpression)exp);
 		}
-
+		else if(exp instanceof FunctionCallExpression) {
+		    this.visit((FunctionCallExpression)exp);
+        }
 		else if(exp == null) {
 		}
 		else {
@@ -232,7 +218,6 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 	public void visit(Variable exp) {
 		this.mStack.push(this.mNode.getLatestValue(exp));
 	}
-	
 
 	@Override
 	public void visit(BooleanVariable exp) {
@@ -283,6 +268,13 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		IExpression lhs = this.mStack.pop();
 		IExpression rhs = this.mStack.pop();
 		this.mStack.push(new EqualsExpression(this.mNode.getSET(), lhs, rhs));
+	}
+
+	@Override
+	public void visit(FunctionCallExpression exp) throws Exception {
+		FunctionHandler handler = new FunctionHandler(this.mSEE, exp);
+		handler.makeFunctionCall();
+		this.mStack.push(new ConcreteConstant(10, this.mNode.getSET()));
 	}
 
 	@Override

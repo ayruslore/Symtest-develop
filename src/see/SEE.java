@@ -1,9 +1,12 @@
 package see;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import expression.FunctionCallExpression;
+import functions.Function;
 import mycfg.CFGBasicBlockNode;
 import mycfg.CFGDecisionNode;
 import set.SET;
@@ -24,14 +27,43 @@ import expression.Type;
 public class SEE {
 
 	private SET mSET;
+	private Set<Function> mfunctions;
 
-	public SEE(ICFG cfg) throws Exception {
+	public SEE(ICFG cfg, Set<Function> functions) throws Exception {
 		if (cfg != null) {
 			this.mSET = new SET(cfg);
 		} else {
 			throw new Exception("Null CFG");
 		}
+		if (functions != null) {
+			this.mfunctions = functions;
+		} else {
+			throw new Exception("Null function list");
+		}
+	}
 
+	public Function getfunctionobject(FunctionCallExpression exp) throws Exception{
+		for(Function func : this.mfunctions) {
+			if(func.getFunction_name() == exp.getFunc_name()) {
+				Set<IIdentifier> formal_args = func.getFormalParameters();
+				Iterator iter = formal_args.iterator();
+				if(formal_args.size() == exp.get_Number_of_Args()) {
+					//Type Checking
+					for(IExpression arg : exp.getArgs()) {
+						IIdentifier var = (IIdentifier) iter.next();
+						if(var.getType() != arg.getType()) {
+							throw new Exception("Type Mismatch in the function call expression " + exp.toString());
+						}
+					}
+					return func;
+				}
+				else {
+					throw new Exception("Argument Number not matching.\n" +
+							"Function " + exp.getFunc_name() + " has " + formal_args.size() + " given only " + exp.get_Number_of_Args() + "in the expression " + exp.toString());
+				}
+			}
+		}
+		throw new Exception("No Function found with the name" + exp.getFunc_name());
 	}
 
 	public SET getSET() {
@@ -162,7 +194,7 @@ public class SEE {
 		List<IStatement> statements = cfgBasicBlockNode.getStatements();
 
 		for (IStatement statement : statements) {
-			SETExpressionVisitor visitor = new SETExpressionVisitor(node,
+			SETExpressionVisitor visitor = new SETExpressionVisitor(this, node,
 					statement.getLHS().getType());
 			IExpression value = null;
 
@@ -175,7 +207,7 @@ public class SEE {
 	}
 
 	private void computeExpression(SETDecisionNode node) throws Exception {
-		SETExpressionVisitor visitor = new SETExpressionVisitor(node,
+		SETExpressionVisitor visitor = new SETExpressionVisitor(this, node,
 				Type.BOOLEAN);
 		CFGDecisionNode cfgNode = (CFGDecisionNode) node.getCFGNode();
 		if (node.getCondition() == null) {

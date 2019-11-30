@@ -1,5 +1,6 @@
 package heuristics;
 
+import functions.Function;
 import graph.IEdge;
 import graph.IGraph;
 import graph.INode;
@@ -26,7 +27,7 @@ public class RemovingEdgeHeuristicsUtil implements ApplyHeuristics {
 
 	public SolverResult performHeuristics(IGraph graph,
 			Set<ICFEdge> mTargets, IPath graphpath, ICFG cfg,
-			CFGToGraphConvertor mConvertor) throws Exception {
+			CFGToGraphConvertor mConvertor, Set<Function> functions) throws Exception {
 		System.out.println("Enter number of trials");
 		Scanner sc = new Scanner(System.in);
 		int num_of_iterations = sc.nextInt();
@@ -34,7 +35,7 @@ public class RemovingEdgeHeuristicsUtil implements ApplyHeuristics {
 		for(int i = 0; i< num_of_iterations;i++) {
 		ArrayList<ICFEdge> path = convertPathEdgesToCFGEdges(graphpath,
 				mConvertor);
-		int index = SymTestUtil.getLongestSatisfiablePrefix(path, cfg);
+		int index = SymTestUtil.getLongestSatisfiablePrefix(path, cfg, functions);
 		int unsatisfiableEdgeIndex = index + 1;
 		IEdge e = graphpath.getPath().get(unsatisfiableEdgeIndex);
 		graph.deleteEdge(e);
@@ -65,7 +66,7 @@ public class RemovingEdgeHeuristicsUtil implements ApplyHeuristics {
 		//completePath.getPath().addAll(nextPath.getPath());
 		ArrayList<ICFEdge> newCFPath = convertPathEdgesToCFGEdges(completePath,
 				mConvertor);
-		SET set = SymTestUtil.getSET(newCFPath, cfg);
+		SET set = SymTestUtil.getSET(newCFPath, cfg, functions);
 		// Solve the predicate
 		solution = SymTestUtil.solveSequence(set);
 		if(solution.getResult()) break;
