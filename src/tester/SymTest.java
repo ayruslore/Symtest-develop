@@ -10,24 +10,13 @@ import graph.IGraph;
 import graph.INode;
 import graph.IPath;
 import heuristics.ApplyHeuristics;
-import heuristics.RemovingEdgeHeuristicsUtil;
-import heuristics.SwapHeuristicsUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 
-import mygraph.Edge;
 import mygraph.Path;
 
 import set.SET;
 import set.SETBasicBlockNode;
-import set.SETDecisionNode;
 import set.SETNode;
 import utilities.Pair;
 import Solver.SolverResult;
@@ -111,7 +100,7 @@ public class SymTest {
 			ArrayList<IEdge> prefix = new ArrayList<IEdge>();
 
 			IPath completePath = new Path(mGraph);
-			Set<IEdge> currentTargets = new HashSet<IEdge>(targets);
+			Set<IEdge> currentTargets = new LinkedHashSet<IEdge>(targets);
 			while ((!stack.isEmpty()) && !(stack.peek().getFirst().equals(startEdge) && !stack.peek().getSecond())) {
 				// Obtain the path that traverses the targets.
 				IPath path;
@@ -317,7 +306,7 @@ public class SymTest {
 	public Set<IEdge> convertTargetEdgesToGraphEdges(Set<ICFEdge> targetEdges)
 			throws Exception {
 		this.mGraph = this.mConvertor.getGraph();
-		Set<IEdge> targets = new HashSet<IEdge>();
+		Set<IEdge> targets = new LinkedHashSet<IEdge>();
 		for (ICFEdge edge : targetEdges) {
 			targets.add(this.mConvertor.getGraphEdge(edge));
 		}

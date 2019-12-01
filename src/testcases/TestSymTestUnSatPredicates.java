@@ -1,18 +1,13 @@
 package testcases;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-//import junit.framework.Assert;
-
+import functions.Function;
 import mycfg.CFEdge;
 import mycfg.CFG;
 import mycfg.CFGBasicBlockNode;
 import mycfg.CFGDecisionNode;
 
-//import org.junit.Test;
 
 import statement.Statement;
 import tester.SymTest;
@@ -122,13 +117,13 @@ public class TestSymTestUnSatPredicates {
 		mCFG.addEdge(e10);
 		mCFG.addEdge(e11);
 
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		targets.add(e3);
 		targets.add(e4);
 		targets.add(e7);
 		targets.add(e8);
 
-		SymTest tester = new SymTest(mCFG, targets);
+		SymTest tester = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = tester.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 		//Assert.assertEquals(testseq.size(), 1);
@@ -210,14 +205,14 @@ public class TestSymTestUnSatPredicates {
 		mCFG.addEdge(e10);
 		mCFG.addEdge(e11);
 
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		targets.add(e3);
 		targets.add(e4);
 		targets.add(e6);
 		targets.add(e7);
 		targets.add(e8);
 
-		SymTest tester = new SymTest(mCFG, targets);
+		SymTest tester = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = tester.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 		//Assert.assertEquals(testseq.size(), 1);
@@ -290,12 +285,12 @@ public class TestSymTestUnSatPredicates {
 		D.setElseEdge(e5);
 		D.setThenEdge(e4);
 
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		targets.add(e3);
 		targets.add(e7);
 		targets.add(e8);
 
-		SymTest tester = new SymTest(mCFG, targets);
+		SymTest tester = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = tester.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 		//Assert.assertEquals(testseq.size(), 1);

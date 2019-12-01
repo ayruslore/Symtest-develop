@@ -4,10 +4,7 @@ import graph.IEdge;
 import graph.IGraph;
 import graph.INode;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import mygraph.Edge;
 import mygraph.Graph;
@@ -38,7 +35,7 @@ public class CFGToGraphConvertor {
 	}
 	
 	private void convert() throws Exception {
-		mCovered = new HashSet<ICFGNode>();
+		mCovered = new LinkedHashSet<ICFGNode>();
 		ICFGNode cfgStart = this.mCFG.getStartNode();
 		INode node = new Node(this.mCFG.getId() + "graph-s", null);
 		this.mGraph = new Graph(node);

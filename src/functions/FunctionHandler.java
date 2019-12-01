@@ -14,7 +14,7 @@ public class FunctionHandler {
     }
 
     public void makeFunctionCall() throws Exception{
-        Function functionobj = this.mSEE.getfunctionobject(this.call_exp);
+        Function functionobj = this.mSEE.getFunctionObject(this.call_exp);
         //System.out.println("function call - " + this.call_exp.toString());
     }
 }

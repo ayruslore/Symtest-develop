@@ -1,16 +1,12 @@
 package testcases;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
+import functions.Function;
 import mycfg.CFEdge;
 import mycfg.CFG;
 import mycfg.CFGBasicBlockNode;
 import mycfg.CFGDecisionNode;
-
-//import org.junit.Test;
 
 import statement.Statement;
 import tester.SymTest;
@@ -188,7 +184,7 @@ public class TestTimer {
 		L.setElseEdge(LM);
 		L.setThenEdge(LN);
 
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		targets.add(CD);
 //		targets.add(DE);
 //		targets.add(EG);
@@ -199,7 +195,7 @@ public class TestTimer {
 		targets.add(IK);
 
 
-		SymTest st = new SymTest(mCFG, targets);
+		SymTest st = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = st.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 		System.out.println(testseq);

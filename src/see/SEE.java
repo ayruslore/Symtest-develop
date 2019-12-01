@@ -1,9 +1,6 @@
 package see;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import expression.FunctionCallExpression;
 import functions.Function;
@@ -42,7 +39,7 @@ public class SEE {
 		}
 	}
 
-	public Function getfunctionobject(FunctionCallExpression exp) throws Exception{
+	public Function getFunctionObject(FunctionCallExpression exp) throws Exception{
 		for(Function func : this.mfunctions) {
 			if(func.getFunction_name() == exp.getFunc_name()) {
 				Set<IIdentifier> formal_args = func.getFormalParameters();
@@ -98,7 +95,7 @@ public class SEE {
 	private void singlestep(ICFEdge edge) throws Exception {
 		boolean valid = false;
 		this.mSET.updateLeafNodeSet();
-		Set<SETNode> newLeafNodes = new HashSet<SETNode>();
+		Set<SETNode> newLeafNodes = new LinkedHashSet<SETNode>();
 		newLeafNodes = this.mSET.getLeafNodes();
 		// check for null edge
 		if (edge == null) {

@@ -1,6 +1,6 @@
 package mygraph;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import graph.IEdge;
@@ -10,7 +10,7 @@ import graph.INode;
 public class GraphtoStringVisitor {
 	private IGraph mGraph;
 	private String mOutputString;
-	private Set<INode> mVisited = new HashSet<INode>();
+	private Set<INode> mVisited = new LinkedHashSet<INode>();
 	public GraphtoStringVisitor(IGraph graph) {
 		this.mGraph = graph;
 	}

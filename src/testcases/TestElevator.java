@@ -1,9 +1,6 @@
 package testcases;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import expression.*;
 import functions.Function;
@@ -11,8 +8,6 @@ import mycfg.CFEdge;
 import mycfg.CFG;
 import mycfg.CFGBasicBlockNode;
 import mycfg.CFGDecisionNode;
-
-//import org.junit.Test;
 
 import statement.Statement;
 import tester.SymTest;
@@ -94,7 +89,7 @@ public class TestElevator {
 		B.addStatement(stmt21);
 
 		Variable min = new Variable("min", mCFG);
-		FunctionCallExpression exp_func = new FunctionCallExpression(mCFG, "funky", new HashSet<IExpression>());
+		FunctionCallExpression exp_func = new FunctionCallExpression(mCFG, "funky", new LinkedHashSet<IExpression>());
 		Statement stmt22 = new Statement(mCFG, min, exp_func);
 		B.addStatement(stmt22);
 
@@ -297,7 +292,7 @@ public class TestElevator {
 		U.setThenEdge(UV);
 		U.setElseEdge(UW);
 
-		targets = new HashSet<ICFEdge>();
+		targets = new LinkedHashSet<ICFEdge>();
 		targets.add(BC);
 		targets.add(CE);
 		targets.add(CW);
@@ -319,7 +314,7 @@ public class TestElevator {
 		targets.add(UW);
 		targets.add(NO);
 		targets.add(NS);
-		Set<Function> allfunctions = new HashSet<Function>();
+		Set<Function> allfunctions = new LinkedHashSet<Function>();
 		SymTest st = new SymTest(mCFG, targets, allfunctions);
 		TestSequence seq = st.generateTestSequence();
 		System.out.println(seq);

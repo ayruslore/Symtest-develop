@@ -4,7 +4,7 @@ import graph.IEdge;
 import graph.IGraph;
 import graph.INode;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import utilities.IdGenerator;
@@ -12,8 +12,8 @@ import utilities.IdGenerator;
 public class Graph implements IGraph {
 
 	private final INode mRoot;
-	private Set<INode> mNodes = new HashSet<INode>();
-	private Set<IEdge> mEdges = new HashSet<IEdge>();
+	private Set<INode> mNodes = new LinkedHashSet<INode>();
+	private Set<IEdge> mEdges = new LinkedHashSet<IEdge>();
 	private String mId;
 	
 	public Graph(INode root) {

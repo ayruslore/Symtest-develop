@@ -1,16 +1,12 @@
 package testcases;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
+import functions.Function;
 import mycfg.CFEdge;
 import mycfg.CFG;
 import mycfg.CFGBasicBlockNode;
 import mycfg.CFGDecisionNode;
-
-//import org.junit.Test;
 
 import statement.Statement;
 import tester.SymTest;
@@ -24,7 +20,6 @@ import expression.BooleanVariable;
 import expression.ConcreteConstant;
 import expression.EqualsExpression;
 import expression.False;
-import expression.GreaterThanExpression;
 import expression.IIdentifier;
 import expression.Input;
 import expression.MulExpression;
@@ -212,12 +207,12 @@ public class CaseStudyRegressionTest {
 		ICFEdge stop_start = new CFEdge("stop_start", mCFG, stop, start);
 		mCFG.addEdge(stop_start);
 
-		Set<ICFEdge> rt1_targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> rt1_targets = new LinkedHashSet<ICFEdge>();
 		rt1_targets.add(d1_d1then);
 		rt1_targets.add(d2_d2else);
 		rt1_targets.add(d3_d3else);
 
-		SymTest st = new SymTest(mCFG, rt1_targets);
+		SymTest st = new SymTest(mCFG, rt1_targets, new LinkedHashSet<Function>());
 		TestSequence seq = st.generateTestSequence();
 		System.out.println(seq);
 

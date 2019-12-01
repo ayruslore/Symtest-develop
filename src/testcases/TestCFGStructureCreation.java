@@ -1,15 +1,12 @@
 package testcases;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
-//import junit.framework.Assert;
 import mycfg.CFEdge;
 import mycfg.CFG;
 import mycfg.CFGBasicBlockNode;
 import mycfg.CFGDecisionNode;
-
-//import org.junit.Test;
 
 import cfg.ICFEdge;
 import cfg.ICFG;
@@ -87,7 +84,7 @@ public class TestCFGStructureCreation {
 
 		CFGBasicBlockNode A = new CFGBasicBlockNode(null);
 		CFGBasicBlockNode F = new CFGBasicBlockNode(null);
-		Set<ICFGNode> nodeSet = new HashSet<ICFGNode>();
+		Set<ICFGNode> nodeSet = new LinkedHashSet<ICFGNode>();
 		this.mCFG = new CFG(A, F);
 		ICFGBasicBlockNode B = new CFGBasicBlockNode(mCFG);
 		this.mCFG.addBasicBlockNode(B);
@@ -134,7 +131,7 @@ public class TestCFGStructureCreation {
 
 		CFGBasicBlockNode A = new CFGBasicBlockNode(null);
 		CFGBasicBlockNode E = new CFGBasicBlockNode(null);
-		Set<ICFGNode> nodeSet = new HashSet<ICFGNode>();
+		Set<ICFGNode> nodeSet = new LinkedHashSet<ICFGNode>();
 		this.mCFG = new CFG(A, E);
 		ICFGBasicBlockNode B = new CFGBasicBlockNode(mCFG);
 		this.mCFG.addBasicBlockNode(B);

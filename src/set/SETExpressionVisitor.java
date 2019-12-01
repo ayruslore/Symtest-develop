@@ -1,9 +1,6 @@
 package set;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 
 import expression.*;
 import functions.FunctionHandler;
@@ -104,7 +101,7 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 	public void visit(Input exp) {
 		IProgram p = this.mNode.getSET();
 		Set<IIdentifier> variables = p.getVariables();
-		Set<String> names = new HashSet<String>();
+		Set<String> names = new LinkedHashSet<String>();
 		for(IIdentifier v : variables) {
 			names.add(v.getName());
 		}
@@ -120,7 +117,7 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 	public void visit(BooleanInput exp) {
 		IProgram p = this.mNode.getSET();
 		Set<IIdentifier> variables = p.getVariables();
-		Set<String> names = new HashSet<String>();
+		Set<String> names = new LinkedHashSet<String>();
 		for(IIdentifier v : variables) {
 			names.add(v.getName());
 		}

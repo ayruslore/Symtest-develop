@@ -1,11 +1,8 @@
 package testcases;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
+import functions.Function;
 import mycfg.CFEdge;
 import mycfg.CFG;
 import mycfg.CFGBasicBlockNode;
@@ -72,10 +69,10 @@ public class TestSymTest {
 		mCFG.addEdge(e6);
 		Statement s1 = new Statement(mCFG, v1, i1);
 		mCFGStart.addStatement(s1);
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		targets.add(e6);
 
-		SymTest tester = new SymTest(mCFG, targets);
+		SymTest tester = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = tester.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 		if(testseq.size() == 0) { System.out.println(1); }
@@ -113,11 +110,11 @@ public class TestSymTest {
 		ICFEdge e5 = new CFEdge("SingleNodeCFG-DT", mCFG, D, mCFGEnd);
 		mCFG.addEdge(e5);
 
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		targets.add(e5);
 		targets.add(e6);
 
-		SymTest tester = new SymTest(mCFG, targets);
+		SymTest tester = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = tester.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 		if(testseq.size() == 1) { System.out.println(1); }
@@ -189,12 +186,12 @@ public class TestSymTest {
 		ICFEdge e7 = new CFEdge("TS", mCFG, mCFGEnd, mCFGStart);
 		mCFG.addEdge(e7);
 
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		// Adding the 'then' edge
 		targets.add(e2);
 		// Adding the 'else' edge
 		targets.add(e3);
-		SymTest tester = new SymTest(mCFG, targets);
+		SymTest tester = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = tester.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 
@@ -281,12 +278,12 @@ public class TestSymTest {
 		ICFEdge e7 = new CFEdge(mCFG, mCFGEnd, mCFGStart);
 		mCFG.addEdge(e7);
 
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		// Adding the 'then' edge
 		targets.add(e2);
 		// Adding the next edge
 		targets.add(e4);
-		SymTest tester = new SymTest(mCFG, targets);
+		SymTest tester = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = tester.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 		if(testseq.size() == 1) { System.out.println(1); }
@@ -364,12 +361,12 @@ public class TestSymTest {
 		ICFEdge e5 = new CFEdge(mCFG, C, mCFGEnd);
 		mCFG.addEdge(e5);
 
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		// Adding the 'then' edge
 		targets.add(e2);
 		// Adding the 'else' edge
 		targets.add(e3);
-		SymTest tester = new SymTest(mCFG, targets);
+		SymTest tester = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = tester.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 		if(testseq.size() == 1) { System.out.println(1); }
@@ -446,12 +443,12 @@ public class TestSymTest {
 		ICFEdge e5 = new CFEdge(mCFG, C, mCFGEnd);
 		mCFG.addEdge(e5);
 
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		// Adding the 'then' edge
 		targets.add(e2);
 		// Adding the next edge
 		targets.add(e4);
-		SymTest tester = new SymTest(mCFG, targets);
+		SymTest tester = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = tester.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 		if(testseq.size() == 1) { System.out.println(1); }
@@ -479,11 +476,11 @@ public class TestSymTest {
 	public void testCFGWithThreeDecisionBlocksWithoutLoopSatisfiableInSingleExecution() throws Exception{
 		System.out.println("Test Case 7 Start\n\n");
 		ICFG mCFG = constructLargestOfThreeNumbersCFG();
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		targets.add(edgeList.get(2));
 		targets.add(edgeList.get(4));
 		targets.add(edgeList.get(8));
-		SymTest tester = new SymTest(mCFG, targets);
+		SymTest tester = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = tester.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 		if(testseq.size() == 3) { System.out.println(1); }
@@ -515,12 +512,12 @@ public class TestSymTest {
 		ICFG mCFG = constructLargestOfThreeNumbersCFG();
 		ICFEdge edge = new CFEdge(mCFG, mCFG.getStopNode(), mCFG.getStartNode());
 		mCFG.addEdge(edge);
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		targets.add(edgeList.get(2));
 		targets.add(edgeList.get(4));
 		targets.add(edgeList.get(5));
 		targets.add(edgeList.get(8));
-		SymTest tester = new SymTest(mCFG, targets);
+		SymTest tester = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = tester.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 		List<Object> resVariable1 = null, resVariable2 = null, resVariable3 = null;
@@ -550,7 +547,7 @@ public class TestSymTest {
 		ICFEdge edge = new CFEdge("TeS", mCFG, mCFG.getStopNode(),
 				mCFG.getStartNode());
 		mCFG.addEdge(edge);
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		targets.add(edgeList.get(2));
 		targets.add(edgeList.get(3));
 		targets.add(edgeList.get(4));
@@ -560,7 +557,7 @@ public class TestSymTest {
 		targets.add(edgeList.get(8));
 		targets.add(edgeList.get(9));
 		targets.add(edgeList.get(10));
-		SymTest tester = new SymTest(mCFG, targets);
+		SymTest tester = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = tester.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 		List<Object> resVariable1 = null, resVariable2 = null, resVariable3 = null;
@@ -648,12 +645,12 @@ public class TestSymTest {
 		mCFG.addEdge(e9);
 		mCFG.addEdge(e10);
 
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		targets.add(e3);
 		targets.add(e7);
 		targets.add(e9);
 
-		SymTest tester = new SymTest(mCFG, targets);
+		SymTest tester = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = tester.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 		List<Object> values = testseq.get(v1);

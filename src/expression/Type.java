@@ -1,6 +1,6 @@
 package expression;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Type {
@@ -9,7 +9,7 @@ public class Type {
     public static final String FUNC = "function call";
 
     private static Type mType = null;
-	private static Set<String> mTypes = new HashSet<String>();
+	private static Set<String> mTypes = new LinkedHashSet<String>();
 	
 	private Type() {
 		Type.mTypes.add(Type.BOOLEAN);

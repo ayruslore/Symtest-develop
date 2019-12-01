@@ -1,16 +1,12 @@
 package testcases;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
+import functions.Function;
 import mycfg.CFEdge;
 import mycfg.CFG;
 import mycfg.CFGBasicBlockNode;
 import mycfg.CFGDecisionNode;
-
-//import org.junit.Test;
 
 import statement.Statement;
 import tester.SymTest;
@@ -32,7 +28,6 @@ import expression.MulExpression;
 import expression.NotExpression;
 import expression.OrExpression;
 import expression.SubExpression;
-import expression.True;
 import expression.Variable;
 
 public class TestMatlabExample {
@@ -291,7 +286,7 @@ public class TestMatlabExample {
 		V.setThenEdge(e27);
 		V.setElseEdge(e28);
 
-		Set<ICFEdge> targets = new HashSet<ICFEdge>();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
 		targets.add(e4);
 		targets.add(e8);
 		targets.add(e12);
@@ -300,7 +295,7 @@ public class TestMatlabExample {
 		targets.add(e20);
 		targets.add(e25);
 
-		SymTest st = new SymTest(mCFG, targets);
+		SymTest st = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = st.generateTestSequence();
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();
 
@@ -474,7 +469,7 @@ public class TestMatlabExample {
 		ICFEdge stop_start = new CFEdge("stop_start", mCFG, stop, start);
 		mCFG.addEdge(stop_start);
 
-		Set<ICFEdge> targets = new HashSet<ICFEdge>(); //mCFG.getEdgeSet();
+		Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>(); //mCFG.getEdgeSet();
 		targets.add(init_mainloop);
 		/*targets.remove(stop_start);
 		targets.remove(init_mainloop);
@@ -486,7 +481,7 @@ public class TestMatlabExample {
 		targets.remove(d3_d3else);
 		targets.remove(d3else_fp2);
 		//targets.removeAll();*/
-		SymTest st = new SymTest(mCFG, targets);
+		SymTest st = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
 		TestSequence seq = st.generateTestSequence();
 		System.out.println(seq);
 		Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();

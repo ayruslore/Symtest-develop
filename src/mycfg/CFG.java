@@ -1,6 +1,6 @@
 package mycfg;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import utilities.IdGenerator;
@@ -10,18 +10,17 @@ import cfg.ICFGBasicBlockNode;
 import cfg.ICFGDecisionNode;
 import cfg.ICFGNode;
 import expression.IIdentifier;
-import expression.Variable;
 
 public class CFG implements ICFG {
 
-	private Set<IIdentifier> mVariables = new HashSet<IIdentifier>();
+	private Set<IIdentifier> mVariables = new LinkedHashSet<IIdentifier>();
 
 	private ICFGBasicBlockNode mStartNode; // = new CFGBasicBlockNode(null);
 	private ICFGBasicBlockNode mStopNode; // = new CFGBasicBlockNode(null);
 	
-	private Set<ICFGDecisionNode> mDecisionNodeList = new HashSet<ICFGDecisionNode>();
-	private Set<ICFGBasicBlockNode> mCFGBasicBlockNodeList = new HashSet<ICFGBasicBlockNode>();
-	private Set<ICFEdge> mEdges = new HashSet<ICFEdge>();
+	private Set<ICFGDecisionNode> mDecisionNodeList = new LinkedHashSet<ICFGDecisionNode>();
+	private Set<ICFGBasicBlockNode> mCFGBasicBlockNodeList = new LinkedHashSet<ICFGBasicBlockNode>();
+	private Set<ICFEdge> mEdges = new LinkedHashSet<ICFEdge>();
 
 	private String mId;
 	
@@ -210,7 +209,7 @@ public class CFG implements ICFG {
 
 	@Override
 	public Set<ICFGNode> getNodeSet() {
-		Set<ICFGNode> nodeSet = new HashSet<ICFGNode>();
+		Set<ICFGNode> nodeSet = new LinkedHashSet<ICFGNode>();
 		for(ICFGNode n : this.mCFGBasicBlockNodeList) {
 			nodeSet.add(n);
 		}

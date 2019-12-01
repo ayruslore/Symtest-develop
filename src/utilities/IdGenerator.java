@@ -1,11 +1,11 @@
 package utilities;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Set;
 
 public class IdGenerator {
-	private static Set<String> mIds = new HashSet<String>();
+	private static Set<String> mIds = new LinkedHashSet<String>();
 	public static String generateId(String type) {		
 		while (true) {
 			Random random = new Random ();

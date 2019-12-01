@@ -3,6 +3,7 @@ package testcases;
 import cfg.ICFEdge;
 import cfg.ICFG;
 import expression.*;
+import functions.Function;
 import mycfg.CFEdge;
 import mycfg.CFG;
 import mycfg.CFGBasicBlockNode;
@@ -116,14 +117,14 @@ public class ExampleTry {
         d3.setThenEdge(d3_d3then_then);
         d3.setElseEdge(d3_stop_else);
 
-        Set<ICFEdge> targets = new HashSet<ICFEdge>();//mCFG.getEdgeSet();
+        Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();//mCFG.getEdgeSet();
         targets.add(init_basic);
         /*targets.remove(d1_d3_else);
         targets.remove(d3_stop_else);
         targets.remove(d2_d2then_then);
         targets.remove(d2then_d3);*/
 
-        SymTest st = new SymTest(mCFG, targets);
+        SymTest st = new SymTest(mCFG, targets, new LinkedHashSet<Function>());
         TestSequence seq = st.generateTestSequence();
         System.out.println(seq);
         Map<IIdentifier, List<Object>> testseq = seq.getTestSequence();

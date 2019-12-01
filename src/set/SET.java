@@ -1,6 +1,6 @@
 package set;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,13 +14,13 @@ public class SET implements IProgram {
 	ICFG mCFG;
 	SETBasicBlockNode mStartNode;
 	
-	Set<SETDecisionNode> mDecisionNodeSet = new HashSet<SETDecisionNode>();
-	Set<SETBasicBlockNode> mBasicBlockNodeSet = new HashSet<SETBasicBlockNode>();
-	Set<SETEdge> mSETEdgeSet = new HashSet<SETEdge>();
+	Set<SETDecisionNode> mDecisionNodeSet = new LinkedHashSet<SETDecisionNode>();
+	Set<SETBasicBlockNode> mBasicBlockNodeSet = new LinkedHashSet<SETBasicBlockNode>();
+	Set<SETEdge> mSETEdgeSet = new LinkedHashSet<SETEdge>();
 	
-	Set<IIdentifier> mVariableSet = new HashSet<IIdentifier>();
+	Set<IIdentifier> mVariableSet = new LinkedHashSet<IIdentifier>();
 	
-	Set<SETNode> mLeafNodeSet = new HashSet<SETNode>();
+	Set<SETNode> mLeafNodeSet = new LinkedHashSet<SETNode>();
 
 	private final String mId;
 	
@@ -123,7 +123,7 @@ public class SET implements IProgram {
 	}
 	
 	public Set<SETNode> getNodeSet() {
-		Set<SETNode> set = new HashSet<SETNode>();
+		Set<SETNode> set = new LinkedHashSet<SETNode>();
 		for(SETNode n : this.mBasicBlockNodeSet) {
 			set.add(n);
 		}

@@ -7,7 +7,7 @@ import graph.INode;
 import graph.IPath;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -40,7 +40,7 @@ public class RemovingEdgeHeuristicsUtil implements ApplyHeuristics {
 		IEdge e = graphpath.getPath().get(unsatisfiableEdgeIndex);
 		graph.deleteEdge(e);
 		INode newStartNode = graphpath.getPath().get(index).getHead();
-		Set<IEdge> uncoveredTargets = new HashSet<IEdge>();
+		Set<IEdge> uncoveredTargets = new LinkedHashSet<IEdge>();
 		uncoveredTargets.addAll(convertTargetEdgesToGraphEdges(mTargets, mConvertor));
 		uncoveredTargets.removeAll(graphpath.getPath().subList(0,
 				unsatisfiableEdgeIndex));
@@ -88,7 +88,7 @@ public class RemovingEdgeHeuristicsUtil implements ApplyHeuristics {
 	
 	public Set<IEdge> convertTargetEdgesToGraphEdges(Set<ICFEdge> targetEdges, CFGToGraphConvertor convertor)
 			throws Exception {
-		Set<IEdge> targets = new HashSet<IEdge>();
+		Set<IEdge> targets = new LinkedHashSet<IEdge>();
 		for (ICFEdge edge : targetEdges) {
 			targets.add(convertor.getGraphEdge(edge));
 		}

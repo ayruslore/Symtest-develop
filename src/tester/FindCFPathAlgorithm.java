@@ -5,11 +5,7 @@ import graph.IGraph;
 import graph.INode;
 import graph.IPath;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import mygraph.Path;
 
@@ -151,7 +147,7 @@ public class FindCFPathAlgorithm {
 	
 	public IPath findCFPath(INode startNode, Set<IEdge> targets) throws Exception {
 		
-		Set<IEdge> currentTargets = new HashSet<IEdge>();
+		Set<IEdge> currentTargets = new LinkedHashSet<IEdge>();
 		for(IEdge e : targets) {
 			currentTargets.add(e);
 		}

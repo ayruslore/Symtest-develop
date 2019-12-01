@@ -60,7 +60,7 @@ public class SampleExample {
         System.out.println("Test Case Start\n\n");
 
         ICFG mCFG = null;
-        Set<ICFEdge> targets = new HashSet<ICFEdge>();
+        Set<ICFEdge> targets = new LinkedHashSet<ICFEdge>();
         CFGBasicBlockNode start = new CFGBasicBlockNode("start",null);
         CFGBasicBlockNode stop = new CFGBasicBlockNode("stop", null);
         mCFG = new CFG(start, stop);
@@ -80,7 +80,7 @@ public class SampleExample {
 
         ICFGBasicBlockNode d1then = new CFGBasicBlockNode("d1then", mCFG);
         Variable newval = new Variable("newval", mCFG);
-        Set<IExpression> actual_args = new HashSet<IExpression>();
+        Set<IExpression> actual_args = new LinkedHashSet<IExpression>();
         actual_args.add(i);
         d1then.addStatement(new Statement(mCFG, newval, new FunctionCallExpression(mCFG, "calc", actual_args)));
         d1then.addStatement(new Statement(mCFG, sum, new AddExpression(mCFG, sum, newval)));
@@ -110,8 +110,8 @@ public class SampleExample {
 
         //calc CFG creating
         ICFG calc_CFG = null;
-        Set<ICFEdge> calc_targets = new HashSet<ICFEdge>();
-        Set<IIdentifier> formal_args = new HashSet<IIdentifier>();
+        Set<ICFEdge> calc_targets = new LinkedHashSet<ICFEdge>();
+        Set<IIdentifier> formal_args = new LinkedHashSet<IIdentifier>();
         ICFGBasicBlockNode calc_start = new CFGBasicBlockNode("calc_start", null);
         ICFGBasicBlockNode calc_stop = new CFGBasicBlockNode("calc_stop", null);
         calc_CFG = new CFG(calc_start, calc_stop);
@@ -148,7 +148,7 @@ public class SampleExample {
 
         formal_args.add(calc_i);
         Function calc = new Function("calc", calc_CFG, formal_args, calc_targets);
-        Set<Function> all_functions = new HashSet<Function>();
+        Set<Function> all_functions = new LinkedHashSet<Function>();
         all_functions.add(calc);
         SymTest tester = new SymTest(mCFG, targets, all_functions);
         TestSequence seq = tester.generateTestSequence();
