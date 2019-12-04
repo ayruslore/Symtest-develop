@@ -15,7 +15,6 @@ import cfg.ICFGNode;
 public class CFGBasicBlockNode extends CFGNode implements ICFGBasicBlockNode {
 
 	private ICFEdge mOutgoingEdge = null;
-	// private List<ICFEdge> mOutgoingEdgeList = new ArrayList<ICFEdge>();
 	private List<IStatement> mStatementList = new ArrayList<IStatement>();
 
 	public CFGBasicBlockNode(ICFG cfg) {
@@ -32,13 +31,12 @@ public class CFGBasicBlockNode extends CFGNode implements ICFGBasicBlockNode {
 			cfg.addBasicBlockNode(this);
 		}
 		if (IdGenerator.hasId(id)) {
-			Exception e = new Exception(
-					"Can't construct CFGBasicBlockNode : something with name '"
-							+ id + "' already exists.");
-			throw e;
+			this.mId = generateId();
 		}
-		IdGenerator.addId(id);
-		this.mId = id;
+		else {
+			IdGenerator.addId(id);
+			this.mId = id;
+		}
 	}
 
 	@Override
@@ -146,11 +144,7 @@ public class CFGBasicBlockNode extends CFGNode implements ICFGBasicBlockNode {
 	}
 
 	private String generateId() {
-		if (this.mCFG != null)
-			return IdGenerator.generateId(this.mCFG.getId()
-					+ "CFGBasicBlockNode");
-		else
-			return IdGenerator.generateId("CFGBasicBlockNode");
+		return IdGenerator.generateId("CFGBasicBlockNode");
 	}
 
 	public String toString() {

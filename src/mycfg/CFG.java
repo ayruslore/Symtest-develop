@@ -51,11 +51,12 @@ public class CFG implements ICFG {
 		this.mCFGBasicBlockNodeList.add(stop);
 		
 		if(IdGenerator.hasId(id)) {
-			Exception e = new Exception("Can't construct CFG : something with name '" + id + "' already exists.");
-			throw e;
+			this.mId = CFG.generateId();
 		}
-		IdGenerator.addId(id);
-		this.mId = id;
+		else {
+			IdGenerator.addId(id);
+			this.mId = id;
+		}
 	}
 
 	private static String generateId() {

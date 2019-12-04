@@ -38,11 +38,12 @@ public class SET implements IProgram {
 		this.mBasicBlockNodeSet.add(this.mStartNode);
 		this.mLeafNodeSet.add(this.mStartNode);
 		if(IdGenerator.hasId(id)) {
-			Exception e = new Exception("Can't construct SET : something with name '" + id + "' already exists.");
-			throw e;			
+			this.mId = SET.generateId();
 		}
-		IdGenerator.addId(id);
-		this.mId = id;
+		else {
+			IdGenerator.addId(id);
+			this.mId = id;
+		}
 	}
 
 	private static String generateId() {
@@ -132,7 +133,6 @@ public class SET implements IProgram {
 		}
 		return set;
 	}
-	
 	
 	@Override
 	public IIdentifier addVariable(IIdentifier var) {

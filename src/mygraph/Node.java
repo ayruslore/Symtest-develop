@@ -38,11 +38,12 @@ public class Node implements INode {
 			this.mGraph = graph;
 		}
 		if(IdGenerator.hasId(id)) {
-			Exception e = new Exception("Can't construct node : something with name '" + id + "' already exists.");
-			throw e;
+			this.mId = Node.generateId();
 		}
-		IdGenerator.addId(id);
-		this.mId = id;
+		else {
+			IdGenerator.addId(id);
+			this.mId = id;
+		}
 	}
 
 

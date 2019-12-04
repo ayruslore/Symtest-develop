@@ -17,6 +17,7 @@ import mygraph.Path;
 
 import set.SET;
 import set.SETBasicBlockNode;
+import set.SETDecisionNode;
 import set.SETNode;
 import utilities.Pair;
 import Solver.SolverResult;
@@ -133,7 +134,7 @@ public class SymTest {
 				System.out.println();*/
 				// Construct the Symbolic Execution Tree
 				set = SymTestUtil.getSET(cfPath, this.mCFG, this.mfunctions);
-				/*System.out.println("SURYA 1");
+				System.out.println("SURYA 1");
 				Set<SETNode> mnode = set.getNodeSet();
 				System.out.println(mnode.size());
 				for (SETNode lol : mnode) {
@@ -149,7 +150,7 @@ public class SymTest {
 						System.out.println( lol.getCFGNode().getId() );
 					}
 				}
-				System.out.println("SURYA 2");*/
+				System.out.println("SURYA 2");
 				// Solve the predicate
 				SolverResult solution;
 				try {

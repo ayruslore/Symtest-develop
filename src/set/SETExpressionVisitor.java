@@ -11,13 +11,11 @@ import visitors.IExprVisitor;
 public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 
 	private SEE mSEE;
-	private SETNode mNode;
 	private Stack<IExpression> mStack = new Stack<IExpression>();
 	private final String mContextType; 
 
-	public SETExpressionVisitor(SEE see ,SETNode node, String type) {
+	public SETExpressionVisitor(SEE see, String type) {
 		this.mSEE = see;
-		this.mNode = node;
 		this.mContextType = type;		
 	}
 
@@ -99,7 +97,7 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 	
 	@Override
 	public void visit(Input exp) {
-		IProgram p = this.mNode.getSET();
+		IProgram p = this.mSEE.getSET();
 		Set<IIdentifier> variables = p.getVariables();
 		Set<String> names = new LinkedHashSet<String>();
 		for(IIdentifier v : variables) {
@@ -107,7 +105,7 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		}
 		String name = SETExpressionVisitor.generateNewVariableName(names);
 		try {
-			this.mStack.push(new Variable(name, this.mContextType, this.mNode.getSET()));
+			this.mStack.push(new Variable(name, this.mContextType, this.mSEE.getSET()));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -115,7 +113,7 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 	}
 	
 	public void visit(BooleanInput exp) {
-		IProgram p = this.mNode.getSET();
+		IProgram p = this.mSEE.getSET();
 		Set<IIdentifier> variables = p.getVariables();
 		Set<String> names = new LinkedHashSet<String>();
 		for(IIdentifier v : variables) {
@@ -132,12 +130,12 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 	
 	@Override
 	public void visit(ConcreteConstant exp) throws Exception {
-		this.mStack.push(new ConcreteConstant(exp.getValue(), this.mNode.getSET()));
+		this.mStack.push(new ConcreteConstant(exp.getValue(), this.mSEE.getSET()));
 	}
 
 	@Override
 	public void visit(False exp) throws Exception {
-		this.mStack.push(new False(this.mNode.getSET()));
+		this.mStack.push(new False(this.mSEE.getSET()));
 	}
 
 	@Override
@@ -145,7 +143,7 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		exp.accept(this);
 		IExpression lhs = this.mStack.pop();
 		IExpression rhs = this.mStack.pop();
-		this.mStack.push(new GreaterThanExpression(this.mNode.getSET(), lhs, rhs));
+		this.mStack.push(new GreaterThanExpression(this.mSEE.getSET(), lhs, rhs));
 	}
 
 	@Override
@@ -153,7 +151,7 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		exp.accept(this);
 		IExpression lhs = this.mStack.pop();
 		IExpression rhs = this.mStack.pop();
-		this.mStack.push(new AddExpression(this.mNode.getSET(), lhs, rhs));
+		this.mStack.push(new AddExpression(this.mSEE.getSET(), lhs, rhs));
 	}
 
 	@Override
@@ -161,7 +159,7 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		exp.accept(this);
 		IExpression lhs = this.mStack.pop();
 		IExpression rhs = this.mStack.pop();
-		this.mStack.push(new SubExpression(this.mNode.getSET(), lhs, rhs));
+		this.mStack.push(new SubExpression(this.mSEE.getSET(), lhs, rhs));
 	}
 
 	@Override
@@ -169,7 +167,7 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		exp.accept(this);
 		IExpression lhs = this.mStack.pop();
 		IExpression rhs = this.mStack.pop();
-		this.mStack.push(new MulExpression(this.mNode.getSET(), lhs, rhs));
+		this.mStack.push(new MulExpression(this.mSEE.getSET(), lhs, rhs));
 	}
 
 
@@ -179,7 +177,7 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		exp.accept(this);
 		IExpression lhs = this.mStack.pop();
 		IExpression rhs = this.mStack.pop();
-		this.mStack.push(new DivExpression(this.mNode.getSET(), lhs, rhs));
+		this.mStack.push(new DivExpression(this.mSEE.getSET(), lhs, rhs));
 	}
 	
 	@Override
@@ -187,7 +185,7 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		exp.accept(this);
 		IExpression lhs = this.mStack.pop();
 		IExpression rhs = this.mStack.pop();
-		this.mStack.push(new GreaterThanExpression(this.mNode.getSET(), lhs, rhs));
+		this.mStack.push(new GreaterThanExpression(this.mSEE.getSET(), lhs, rhs));
 	}
 	
 	@Override
@@ -195,7 +193,7 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		exp.accept(this);
 		IExpression lhs = this.mStack.pop();
 		IExpression rhs = this.mStack.pop();
-		this.mStack.push(new LesserThanExpression(this.mNode.getSET(), lhs, rhs));
+		this.mStack.push(new LesserThanExpression(this.mSEE.getSET(), lhs, rhs));
 	}
 	
 	@Override
@@ -203,22 +201,28 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		exp.accept(this);
 		IExpression lhs = this.mStack.pop();
 		IExpression rhs = this.mStack.pop();
-		this.mStack.push(new LesserThanEqualToExpression(this.mNode.getSET(), lhs, rhs));
+		this.mStack.push(new LesserThanEqualToExpression(this.mSEE.getSET(), lhs, rhs));
 	}
 
 	@Override
 	public void visit(True exp) throws Exception {
-		this.mStack.push(new True(this.mNode.getSET()));
+		this.mStack.push(new True(this.mSEE.getSET()));
 	}
 
 	@Override
 	public void visit(Variable exp) {
-		this.mStack.push(this.mNode.getLatestValue(exp));
+		SET trace = this.mSEE.getSET();
+		trace.updateLeafNodeSet();
+		SETNode node = (SETNode) trace.getLeafNodes().iterator().next();
+		this.mStack.push(node.getLatestValue(exp));
 	}
 
 	@Override
 	public void visit(BooleanVariable exp) {
-		this.mStack.push(this.mNode.getLatestValue(exp));
+		SET trace = this.mSEE.getSET();
+		trace.updateLeafNodeSet();
+		SETNode node = (SETNode) trace.getLeafNodes().iterator().next();
+		this.mStack.push(node.getLatestValue(exp));
 	}
 
 	private static String generateNewVariableName (Set<String> names) {
@@ -241,7 +245,7 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		exp.accept(this);
 		IExpression lhs = this.mStack.pop();
 		IExpression rhs = this.mStack.pop();
-		this.mStack.push(new AndExpression(this.mNode.getSET(), lhs, rhs));
+		this.mStack.push(new AndExpression(this.mSEE.getSET(), lhs, rhs));
 	}
 
 
@@ -250,13 +254,13 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		exp.accept(this);
 		IExpression lhs = this.mStack.pop();
 		IExpression rhs = this.mStack.pop();
-		this.mStack.push(new OrExpression(this.mNode.getSET(), lhs, rhs));
+		this.mStack.push(new OrExpression(this.mSEE.getSET(), lhs, rhs));
 	}
 
 	@Override
 	public void visit(NotExpression exp) throws Exception {
 		exp.accept(this);
-		this.mStack.push(new NotExpression(this.mNode.getSET(), this.mStack.pop()));
+		this.mStack.push(new NotExpression(this.mSEE.getSET(), this.mStack.pop()));
 	}
 
 	@Override
@@ -264,14 +268,14 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		exp.accept(this);
 		IExpression lhs = this.mStack.pop();
 		IExpression rhs = this.mStack.pop();
-		this.mStack.push(new EqualsExpression(this.mNode.getSET(), lhs, rhs));
+		this.mStack.push(new EqualsExpression(this.mSEE.getSET(), lhs, rhs));
 	}
 
 	@Override
 	public void visit(FunctionCallExpression exp) throws Exception {
 		FunctionHandler handler = new FunctionHandler(this.mSEE, exp);
-		handler.makeFunctionCall();
-		this.mStack.push(new ConcreteConstant(10, this.mNode.getSET()));
+		IExpression return_value = handler.makeFunctionCall();
+		this.mStack.push(return_value);
 	}
 
 	@Override

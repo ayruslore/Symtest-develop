@@ -31,14 +31,15 @@ public class CFEdge implements ICFEdge {
 		this.mTail = tail;
 		this.mHead = head;
 		if(IdGenerator.hasId(id)) {
-			Exception e = new Exception("Can't construct CFEdge : something with name '" + id + "' already exists.");
-			throw e;			
+			this.mId = CFEdge.generateId();
+		}
+		else {
+			IdGenerator.addId(id);
+			this.mId = id;
 		}
 		if(cfg != null) {
 			cfg.addEdge(this);
 		}
-		IdGenerator.addId(id);
-		this.mId = id;
 	}
 
 	@Override

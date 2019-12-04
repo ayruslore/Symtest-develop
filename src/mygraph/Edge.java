@@ -33,12 +33,12 @@ public class Edge implements IEdge {
 			graph.addEdge(this);
 		}
 		if(IdGenerator.hasId(id)) {
-//			IdGenerator.printAllIds();
-			Exception e = new Exception("Can't construct edge : something with name '" + id + "' already exists.");
-			throw e;			
+			this.mId = Edge.generateId();
 		}
-		IdGenerator.addId(id);
-		this.mId = id;
+		else {
+			IdGenerator.addId(id);
+			this.mId = id;
+		}
 	}
 
 	@Override

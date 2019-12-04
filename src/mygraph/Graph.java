@@ -28,11 +28,12 @@ public class Graph implements IGraph {
 		this.mRoot = root;
 		root.setGraph(this);
 		if(IdGenerator.hasId(id)) {
-			Exception e = new Exception("Can't construct graph : something with name '" + id + "' already exists.");
-			throw e;
+			this.mId = Graph.generateId();
 		}
-		IdGenerator.addId(id);
-		this.mId = id;
+		else {
+			IdGenerator.addId(id);
+			this.mId = id;
+		}
 	}
 
 	@Override

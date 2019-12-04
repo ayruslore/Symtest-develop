@@ -10,8 +10,8 @@ public class FunctionCallExpression extends Expression {
     private String func_name;
     private Set<IExpression> args;
 
-    public FunctionCallExpression(IProgram program, String name, Set<IExpression> c_args) throws Exception {
-        super(program, Type.FUNC);
+    public FunctionCallExpression(IProgram program, String name, Set<IExpression> c_args, String type) throws Exception {
+        super(program, type);
         this.func_name = name;
         this.args = c_args;
     }

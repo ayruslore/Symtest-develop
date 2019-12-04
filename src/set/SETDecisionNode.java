@@ -27,11 +27,12 @@ public class SETDecisionNode extends SETNode {
 		this.mCondition = c;
 		
 		if(IdGenerator.hasId(id)) {
-			Exception e = new Exception("Can't construct SETDecisionNode : something with name '" + id + "' already exists.");
-			throw e;			
+			this.mId = SETDecisionNode.generateId();
 		}
-		IdGenerator.addId(id);
-		this.mId = id;
+		else {
+			IdGenerator.addId(id);
+			this.mId = id;
+		}
 	}
 
 	private static String generateId() {

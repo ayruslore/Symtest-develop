@@ -32,11 +32,12 @@ public class CFGDecisionNode extends CFGNode implements ICFGDecisionNode {
 		}
 		this.mCondition = c;
 		if(IdGenerator.hasId(id)) {
-			Exception exception = new Exception("Can't construct CFGDecisionNode : something with name '" + id + "' already exists.");
-			throw exception;
+			this.mId = CFGDecisionNode.generateId();;
 		}
-		IdGenerator.addId(id);
-		this.mId = id;
+		else {
+			IdGenerator.addId(id);
+			this.mId = id;
+		}
 	}
 
 	@Override

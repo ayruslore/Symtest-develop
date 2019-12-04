@@ -49,9 +49,13 @@ public class SEE {
 					for(IExpression arg : exp.getArgs()) {
 						IIdentifier var = (IIdentifier) iter.next();
 						if(var.getType() != arg.getType()) {
-							throw new Exception("Type Mismatch in the function call expression " + exp.toString());
+							throw new Exception("Argument Type Mismatch in the function call expression " + exp.toString());
 						}
 					}
+					//Return Type Checking
+					if(exp.getType() != func.getReturn_type())
+						throw new Exception("Function Type and Call Type Mismatch.");
+
 					return func;
 				}
 				else {
@@ -130,24 +134,24 @@ public class SEE {
 					if (edge.equals(corrDecisionNode.getThenEdge())) {
 						// case 3a
 						if (newNode instanceof CFGBasicBlockNode) {
-							addNewSETBasicBlockNode(newNode, newSETEdge);
 							((SETDecisionNode) leaf).setThenEdge(newSETEdge);
+							addNewSETBasicBlockNode(newNode, newSETEdge);
 						}
 						// case 4a
 						else if (newNode instanceof CFGDecisionNode) {
-							addNewSETDecisionNode(newNode, newSETEdge);
 							((SETDecisionNode) leaf).setThenEdge(newSETEdge);
+							addNewSETDecisionNode(newNode, newSETEdge);
 						}
 					} else if (edge.equals(corrDecisionNode.getElseEdge())) {
 						// case 3b
 						if (newNode instanceof CFGBasicBlockNode) {
-							addNewSETBasicBlockNode(newNode, newSETEdge);
 							((SETDecisionNode) leaf).setElseEdge(newSETEdge);
+							addNewSETBasicBlockNode(newNode, newSETEdge);
 						}
 						// case 4b
 						else if (newNode instanceof CFGDecisionNode) {
-							addNewSETDecisionNode(newNode, newSETEdge);
 							((SETDecisionNode) leaf).setElseEdge(newSETEdge);
+							addNewSETDecisionNode(newNode, newSETEdge);
 						}
 					}
 				}
@@ -182,30 +186,30 @@ public class SEE {
 		newSETEdge.setHead(newSETNode);
 		newSETNode.setIncomingEdge(newSETEdge);
 		this.mSET.addEdge(newSETEdge);
-		this.computeStatementList(newSETNode);
+		this.computeStatementList( (CFGBasicBlockNode) newNode);
 	}
 
-	private void computeStatementList(SETBasicBlockNode node) throws Exception {
-		ICFGBasicBlockNode cfgBasicBlockNode = (ICFGBasicBlockNode) node
-				.getCFGNode();
-		List<IStatement> statements = cfgBasicBlockNode.getStatements();
+	private void computeStatementList(CFGBasicBlockNode node) throws Exception {
+		this.mSET.updateLeafNodeSet();
+		List<IStatement> statements = node.getStatements();
 
 		for (IStatement statement : statements) {
-			SETExpressionVisitor visitor = new SETExpressionVisitor(this, node,
-					statement.getLHS().getType());
+			SETExpressionVisitor visitor = new SETExpressionVisitor(this, statement.getLHS().getType());
 			IExpression value = null;
 
 			visitor.visit(statement.getRHS());
 			value = visitor.getValue();
 
 			IIdentifier var = statement.getLHS();
-			node.setValue(var, value);
+
+			this.mSET.updateLeafNodeSet();
+			SETNode leaf = (SETNode) this.mSET.getLeafNodes().iterator().next();
+			((SETBasicBlockNode) leaf).setValue(var, value);
 		}
 	}
 
 	private void computeExpression(SETDecisionNode node) throws Exception {
-		SETExpressionVisitor visitor = new SETExpressionVisitor(this, node,
-				Type.BOOLEAN);
+		SETExpressionVisitor visitor = new SETExpressionVisitor(this, Type.BOOLEAN);
 		CFGDecisionNode cfgNode = (CFGDecisionNode) node.getCFGNode();
 		if (node.getCondition() == null) {
 			throw new Exception("Null Expression");

@@ -14,8 +14,6 @@ import statement.Statement;
 import tester.SymTest;
 import tester.TestSequence;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.*;
 
 public class SampleExample {
@@ -25,10 +23,7 @@ public class SampleExample {
             SampleCodeTest();
         }
         catch (Exception e) {
-            StringWriter sw = new StringWriter();
-            e.printStackTrace(new PrintWriter(sw));
-            String exceptionAsString = sw.toString();
-            System.out.println(exceptionAsString);
+            e.printStackTrace();
         }
     }
 
@@ -42,7 +37,7 @@ public class SampleExample {
             newval = calc(i);
             sum = sum + newval;
         }
-        newval = calc(i);
+        newval = calc(n + 2);
         sum = sum + newval;
     }
 
@@ -82,12 +77,14 @@ public class SampleExample {
         Variable newval = new Variable("newval", mCFG);
         Set<IExpression> actual_args = new LinkedHashSet<IExpression>();
         actual_args.add(i);
-        d1then.addStatement(new Statement(mCFG, newval, new FunctionCallExpression(mCFG, "calc", actual_args)));
+        d1then.addStatement(new Statement(mCFG, newval, new FunctionCallExpression(mCFG, "calc", actual_args, Type.INT)));
         d1then.addStatement(new Statement(mCFG, sum, new AddExpression(mCFG, sum, newval)));
         mCFG.addBasicBlockNode(d1then);
 
         ICFGBasicBlockNode basic = new CFGBasicBlockNode("basic", mCFG);
-        basic.addStatement(new Statement(mCFG, newval, new FunctionCallExpression(mCFG, "calc", actual_args)));
+        Set<IExpression> actual_args2 = new LinkedHashSet<IExpression>();
+        actual_args2.add(new AddExpression(mCFG, n, new ConcreteConstant(2, mCFG)));
+        basic.addStatement(new Statement(mCFG, newval, new FunctionCallExpression(mCFG, "calc", actual_args2, Type.INT)));
         basic.addStatement(new Statement(mCFG, sum, new AddExpression(mCFG, sum, newval)));
         mCFG.addBasicBlockNode(basic);
 
@@ -106,7 +103,11 @@ public class SampleExample {
         ICFEdge basic_stop = new CFEdge("basic_stop", mCFG, basic, stop);
         mCFG.addEdge(basic_stop);
 
+        //ICFEdge loop = new CFEdge("stop_start", mCFG, stop, start);
+        //mCFG.addEdge(loop);
+
         targets.add(D1_d1then);
+        //targets.add(D1_basic);
 
         //calc CFG creating
         ICFG calc_CFG = null;
@@ -117,6 +118,8 @@ public class SampleExample {
         calc_CFG = new CFG(calc_start, calc_stop);
 
         Variable calc_i = new Variable("calc_i", calc_CFG);
+        Variable calc_a = new Variable("calc_a", calc_CFG);
+        BooleanVariable calc_b = new BooleanVariable("calc_b", calc_CFG);
         Variable return_value = new Variable("return_value", calc_CFG);
         LesserThanEqualToExpression exp2 = new LesserThanEqualToExpression(calc_CFG, calc_i, new ConcreteConstant(10, calc_CFG));
         ICFGDecisionNode calc_d1 = new CFGDecisionNode("d1", calc_CFG, exp2);
@@ -147,7 +150,7 @@ public class SampleExample {
         calc_targets.add(d1_else);
 
         formal_args.add(calc_i);
-        Function calc = new Function("calc", calc_CFG, formal_args, calc_targets);
+        Function calc = new Function("calc", calc_CFG, formal_args, calc_targets, Type.INT);
         Set<Function> all_functions = new LinkedHashSet<Function>();
         all_functions.add(calc);
         SymTest tester = new SymTest(mCFG, targets, all_functions);

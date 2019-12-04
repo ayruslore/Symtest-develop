@@ -3,9 +3,9 @@ package functions;
 import cfg.ICFEdge;
 import cfg.ICFG;
 import expression.IIdentifier;
-import expression.Variable;
-import graph.IPath;
+import expression.Type;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public class Function {
@@ -13,10 +13,11 @@ public class Function {
     private Set<IIdentifier> parameters;
     private ICFG func_cfg;
     private Set<ICFEdge> targets_edges;
+    private String return_type;
 
-    public Set<IPath> paths = null;
+    public Set<ArrayList<ICFEdge>> paths = null;
 
-    public Function(String name, ICFG mcfg, Set<IIdentifier> args, Set<ICFEdge> edges) throws Exception {
+    public Function(String name, ICFG mcfg, Set<IIdentifier> args, Set<ICFEdge> edges, String type) throws Exception {
         if(name.length() == 0) {
             Exception e = new Exception("Exception : Function Name is Empty");
             throw e;
@@ -39,11 +40,17 @@ public class Function {
             this.parameters = args;
         }
         this.targets_edges = edges;
+        if(Type.hasType(type))
+            this.return_type = type;
+        else
+            throw new Exception("Type " + type + " is not present.");
     }
 
     public String getFunction_name(){
         return this.func_name;
     }
+
+    public String getReturn_type() { return this.return_type; }
 
     public ICFG getFunction_cfg(){
         return this.func_cfg;
