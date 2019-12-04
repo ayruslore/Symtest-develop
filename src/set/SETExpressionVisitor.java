@@ -185,7 +185,7 @@ public class SETExpressionVisitor implements IExprVisitor<IExpression> {
 		exp.accept(this);
 		IExpression lhs = this.mStack.pop();
 		IExpression rhs = this.mStack.pop();
-		this.mStack.push(new GreaterThanExpression(this.mSEE.getSET(), lhs, rhs));
+		this.mStack.push(new GreaterThanEqualToExpression(this.mSEE.getSET(), lhs, rhs));
 	}
 	
 	@Override

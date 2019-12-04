@@ -123,15 +123,26 @@ public class FunctionHandler {
         newSETEdge.setHead(newSETStartNode);
         newSETStartNode.setIncomingEdge(newSETEdge);
         trace.addEdge(newSETEdge);
-        return getReturnValue((SETBasicBlockNode) leaf);
+        return getReturnValue();
     }
 
-    private IExpression getReturnValue(SETBasicBlockNode stop_node) {
-        Map<IIdentifier, IExpression> values = ((SETBasicBlockNode) stop_node.getPredecessorNode()).getValues();
-        for(Map.Entry<IIdentifier, IExpression> entry : values.entrySet()) {
-            if(entry.getKey().getName() == "return_value") {
-                return entry.getValue();
+    private IExpression getReturnValue() {
+        Map<IIdentifier, IExpression> values;
+        SET trace = this.mSEE.getSET();
+        trace.updateLeafNodeSet();
+        SETNode node = (SETNode) trace.getLeafNodes().iterator().next();
+        boolean found = false;
+        while(found == false) {
+            if(node instanceof SETBasicBlockNode) {
+                values = ((SETBasicBlockNode) node).getValues();
+                for(Map.Entry<IIdentifier, IExpression> entry : values.entrySet()) {
+                    if(entry.getKey().getName() == "return_value") {
+                        found = true;
+                        return entry.getValue();
+                    }
+                }
             }
+            node = node.getPredecessorNode();
         }
         return null;
     }
