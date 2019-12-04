@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package utilities;
 
 public interface IPair<T1, T2> {
@@ -7,3 +8,14 @@ public interface IPair<T1, T2> {
 	
 	public boolean equals(T1 first, T2 second);
 }
+=======
+package utilities;
+
+public interface IPair<T1, T2> {
+	public T1 getFirst();
+	
+	public T2 getSecond();
+	
+	public boolean equals(T1 first, T2 second);
+}
+>>>>>>> 25ebf124fd450adaed57ee1006dedb1a7734bcf9
