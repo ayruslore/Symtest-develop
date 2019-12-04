@@ -129,7 +129,6 @@ public class FunctionHandler {
     private IExpression getReturnValue(SETBasicBlockNode stop_node) {
         Map<IIdentifier, IExpression> values = ((SETBasicBlockNode) stop_node.getPredecessorNode()).getValues();
         for(Map.Entry<IIdentifier, IExpression> entry : values.entrySet()) {
-            System.out.println(entry.getKey().getName());
             if(entry.getKey().getName() == "return_value") {
                 return entry.getValue();
             }

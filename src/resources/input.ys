@@ -1,5 +1,5 @@
-(define symvar835880902::int)
-(define symvar630256390::int)
-(assert ( and ( and ( and true ( < symvar630256390 symvar835880902)) ( <= symvar630256390 10)) ( <= ( + symvar835880902 2) 10)))
+(define symvar2038800904::int)
+(define symvar42536239::int)
+(assert ( and ( and ( and true ( < symvar42536239 symvar2038800904)) ( <= symvar42536239 10)) ( <= ( + symvar2038800904 2) 10)))
 (check)
 (show-model)
