@@ -1,0 +1,6 @@
+(define symvar1549849082::int)
+(define symvar10175728::int)
+(define symvar821213308::int)
+(assert ( and ( and ( and ( and ( and true ( and ( > symvar1549849082 1) ( and ( > symvar10175728 1) ( > symvar821213308 1)))) ( > ( + symvar10175728 symvar821213308) symvar1549849082)) ( > ( + symvar10175728 symvar821213308) symvar1549849082)) ( > ( + symvar10175728 symvar821213308) symvar1549849082)) ( and true ( and true true))))
+(check)
+(show-model)

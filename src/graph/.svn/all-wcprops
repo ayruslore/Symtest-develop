@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/test/!svn/ver/4/SymbolicTest/src/graph
+END
+IPath.java
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/test/!svn/ver/15/SymbolicTest/src/graph/IPath.java
+END
+INode.java
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/test/!svn/ver/4/SymbolicTest/src/graph/INode.java
+END
+IEdge.java
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/test/!svn/ver/4/SymbolicTest/src/graph/IEdge.java
+END
+IGraph.java
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/test/!svn/ver/4/SymbolicTest/src/graph/IGraph.java
+END

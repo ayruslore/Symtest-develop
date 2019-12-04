@@ -1,0 +1,52 @@
+package tester;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import expression.Variable;
+
+public class TestSequence {
+	
+	private Map<Variable, List<Object>> mTestSequence = new HashMap<Variable, List<Object>>();
+	
+	public TestSequence(Set<Variable> vars) {
+		for(Variable var : vars)
+		this.mTestSequence.put(var, new LinkedList<Object>());
+	}
+	
+	
+	public void addInputValue(Variable var, Object val) {
+		List<Object> valueList = this.mTestSequence.get(var);
+		valueList.add(val);
+	}
+	
+	public Map<Variable, List<Object>> getTestSequence() {
+		return this.mTestSequence;
+	}
+	
+	/*public String toString() {
+		String s = "";
+		for (Variable var : mTestSequence.keySet()) {
+			s = s + this.varValuesToString(var) + "\n";
+		}
+		return s;
+	}
+
+	private String varValuesToString(Variable var) {
+		String s = "variable '" + var.getName() + "' = {";
+		List<Object> values = this.mTestSequence.get(var);
+		for(Object value : values) {
+			if(value != null) {
+				s = s + value.toString() + ", ";
+			}
+			else {
+				s = s + "X" + " ";
+			}
+		}
+		s = s + "}";
+		return s;
+	}*/
+}
