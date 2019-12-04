@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package visitors;
 
 import expression.*;
@@ -12,19 +11,4 @@ public interface IExpressionVisitor {
 	public void push(IExpression lhs);
 	public IExpression visit(IExpression exp) throws Exception;
 	public IExpression visit(AddExpression exp);
-=======
-package visitors;
-
-import expression.*;
-
-public interface IExpressionVisitor {
-	public IExpression visit(ConcreteConstant exp);
-	public IExpression visit(False exp);
-	public IExpression visit(GreaterThanExpression exp);
-	public IExpression visit(True exp);
-	public IExpression visit(Variable exp);
-	public void push(IExpression lhs);
-	public IExpression visit(IExpression exp) throws Exception;
-	public IExpression visit(AddExpression exp);
->>>>>>> 25ebf124fd450adaed57ee1006dedb1a7734bcf9
 }

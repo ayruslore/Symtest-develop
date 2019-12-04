@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package program;
 
 import java.util.Set;
@@ -10,16 +9,3 @@ public interface IProgram {
 	public boolean hasVariable(Variable var);
 	public Set<Variable> getVariables();
 }
-=======
-package program;
-
-import java.util.Set;
-
-import expression.Variable;
-
-public interface IProgram {
-	public Variable addVariable(Variable var);
-	public boolean hasVariable(Variable var);
-	public Set<Variable> getVariables();
-}
->>>>>>> 25ebf124fd450adaed57ee1006dedb1a7734bcf9
