@@ -4,6 +4,10 @@
 
 - Unit Tests : JUnit
 
+- Link to the Symtest Paper : https://dl.acm.org/doi/10.1145/2856636.2856642
+
+- Repo of the SymTest Author's code : https://github.com/sujitkc/symtest
+
 Development code. Adding function call code to symtest code.
 
 SymTest is a test generation tool using symbolic testing and graph algorithms to generate efficient test sequences for embedded software systems.
